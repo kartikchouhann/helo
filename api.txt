@@ -1,0 +1,86 @@
+api 
+
+
+Advantages of Using Azure API Management (APIM)
+Centralized Management:
+
+Unified API management, consistent documentation, and governance.
+Built-in analytics for monitoring and optimization.
+Enhanced Security:
+
+Supports various authentication mechanisms.
+Rate limiting, throttling, and quotas to protect APIs.
+Developer Engagement:
+
+Customizable developer portal for API discovery and testing.
+Automatic API documentation generation.
+Policy Implementation:
+
+Custom and built-in policies for request/response transformation, caching, and more.
+Scalability and Performance:
+
+Global reach with low latency and high availability.
+Response caching to improve performance.
+
+
+
+
+
+
+Advantages of Deploying Applications in Azure App Service Using Docker Images
+Portability:
+
+Consistency across different environments (development, testing, production).
+Isolation:
+
+Clean, isolated environments for each service.
+Scalability:
+
+Easy scaling of applications based on demand.
+Continuous Deployment:
+
+Streamlined CI/CD with automated builds, testing, and deployments.
+Support for blue-green deployments and canary releases.
+Flexibility:
+
+Custom runtime environments and support for multiple programming languages.
+Resource Efficiency:
+
+Lightweight and fast-starting containers compared to traditional VMs.
+DevOps Practices:
+
+Promotes Infrastructure as Code (IaC) for manageable and version-controlled infrastructure setups.
+
+
+
+Key Disadvantages of Deploying from Code in Azure App Service
+Inconsistency Across Environments:
+
+Potential variations in configurations and dependencies across different environments.
+Dependency Management Challenges:
+
+Managing and updating dependencies can be error-prone and inconsistent.
+Scalability Limitations:
+
+Less efficient scaling compared to containerized deployments.
+Higher Resource Utilization:
+
+Longer startup times and higher resource consumption.
+Complex CI/CD Integration:
+
+More complex and less flexible than containerized workflows.
+Version Control and Rollback Issues:
+
+Lack of robust mechanisms for version control and easy rollback.
+Configuration Drift:
+
+Environments may drift apart over time, causing inconsistencies.
+Security Concerns:
+
+Risk of exposing sensitive information if not handled properly.
+Operational Overhead:
+
+Increased manual effort for maintaining environment configurations.
+Limited Customization:
+
+Less flexibility in customizing the runtime environment compared to Docker.
