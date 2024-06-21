@@ -1,0 +1,75 @@
+Components and Cost Estimation
+Azure App Service:
+
+Used to host your 7 APIs and 1 web app.
+Pricing varies based on the tier (Free, Shared, Basic, Standard, Premium, Isolated).
+Azure API Management (APIM):
+
+Used to manage and route traffic to your APIs.
+Pricing varies based on the tier (Developer, Basic, Standard, Premium, Consumption).
+Azure Container Registry (ACR):
+
+Used to store your Docker images.
+Pricing is based on the storage and operations (Basic, Standard, Premium).
+Azure Pipelines:
+
+Used for CI/CD.
+Includes free tier with 1,800 minutes per month, additional minutes are charged.
+Azure SQL Database:
+
+Used to store your application data.
+Pricing varies based on the tier and performance level (DTUs, vCores).
+Other Services:
+
+Storage for logs, monitoring, and any additional services like Azure Key Vault.
+Example Calculation
+Assumptions:
+
+App Service Plan: Standard S1 (100 total ACU, 1.75 GB RAM) for each app.
+API Management: Standard tier.
+ACR: Standard tier.
+Azure Pipelines: Additional build minutes.
+SQL Database: Standard S3 (100 DTUs).
+1. Azure App Service
+Standard S1: $73.84/month per instance.
+Total for 8 instances (7 APIs + 1 web app): 8 * $73.84 = $590.72/month.
+2. Azure API Management
+Standard tier: $548.63/month.
+3. Azure Container Registry
+Standard tier: $0.167 per GiB storage, $0.0035 per 10,000 operations.
+Estimate 50 GiB storage: 50 * $0.167 = $8.35/month.
+Estimate 1,000,000 operations: 100 * $0.0035 = $3.50/month.
+Total: $8.35 + $3.50 = $11.85/month.
+4. Azure Pipelines
+Free tier: 1,800 minutes/month.
+Additional minutes (estimate 5,000 total minutes): (5000 - 1800) * $0.002 = $6.40/month.
+5. Azure SQL Database
+Standard S3 (100 DTUs): $149.91/month.
+6. Additional Costs (Logs, Monitoring, etc.)
+Estimate additional costs: $50/month.
+Total Estimated Monthly Cost
+bash
+Copy code
+App Service:   $590.72
+APIM:          $548.63
+ACR:           $11.85
+Pipelines:     $6.40
+SQL Database:  $149.91
+Other:         $50.00
+-------------------------
+Total:         $1,357.51/month
+Detailed Breakdown
+plaintext
+Copy code
++---------------------------------+-------------+
+| Service                         | Monthly Cost|
++---------------------------------+-------------+
+| Azure App Service (8 instances) | $590.72     |
+| Azure API Management            | $548.63     |
+| Azure Container Registry        | $11.85      |
+| Azure Pipelines                 | $6.40       |
+| Azure SQL Database              | $149.91     |
+| Additional Costs                | $50.00      |
++---------------------------------+-------------+
+| Total Estimated Cost            | $1,357.51   |
++---------------------------------+-------------+
