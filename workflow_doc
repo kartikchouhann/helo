@@ -1,12 +1,13 @@
-Akeyless:
-Description: Akeyless is a secrets management service that securely stores and manages credentials, API keys, and other sensitive information.
-Purpose: Ensures that sensitive data such as credentials, tokens, and keys are securely stored and managed, preventing unauthorized access.
+3.6. API Management
+Azure API Management (APIM):
+Description: Azure API Management is a service that enables organizations to publish, secure, transform, maintain, and monitor APIs.
+Purpose: Provides a central interface to manage APIs, including routing, security, rate limiting, and analytics.
 Features:
-Secret Storage: Centralized storage for all types of secrets.
-Access Control: Granular access controls to ensure only authorized users and systems can access secrets.
-Audit Logs: Detailed logging of access and modifications for compliance and security monitoring.
-Automated Secret Rotation: Regularly rotates secrets to minimize the risk of exposure.
-3.6. Environment Management
+API Gateway: Acts as a gateway to route requests to backend services.
+Security: Offers security features like OAuth 2.0, JWT validation, and IP filtering.
+Analytics: Provides insights into API usage and performance.
+Developer Portal: Enables API consumers to discover, use, and subscribe to APIs.
+3.7. Environment Management
 Branch Management:
 DEVELOP Branch:
 Purpose: Used for development, quality assurance (QA), and pre-production (PREPROD) environments.
@@ -56,3 +57,6 @@ Purpose: Provides scalable hosting for web applications.
 4.8. Akeyless
 Description: A secrets management service.
 Purpose: Manages and secures credentials, API keys, and other secrets.
+4.9. Azure API Management (APIM)
+Description: A service for managing APIs.
+Purpose: Centralizes API management including security, rate limiting, routing, and analytics.
