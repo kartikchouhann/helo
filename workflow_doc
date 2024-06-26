@@ -1,14 +1,58 @@
-Deployment:
-Targets: Docker images are deployed to AKS (Azure Kubernetes Service), Azure App Service, or Virtual Machines (VMs).
-Database Deployment: DACPAC files are deployed over SQL servers.
-3.4. Database Management
-SQL Server: Acts as the central database server.
-Databases:
-Accounting & Reporting DB
-Actuarial DB
-Admin DB
-Claims DB
-Litigation DB
-Premium Audit DB
-Underwriting DB
-3.5. Secrets and Credentials Management
+Akeyless:
+Description: Akeyless is a secrets management service that securely stores and manages credentials, API keys, and other sensitive information.
+Purpose: Ensures that sensitive data such as credentials, tokens, and keys are securely stored and managed, preventing unauthorized access.
+Features:
+Secret Storage: Centralized storage for all types of secrets.
+Access Control: Granular access controls to ensure only authorized users and systems can access secrets.
+Audit Logs: Detailed logging of access and modifications for compliance and security monitoring.
+Automated Secret Rotation: Regularly rotates secrets to minimize the risk of exposure.
+3.6. Environment Management
+Branch Management:
+DEVELOP Branch:
+Purpose: Used for development, quality assurance (QA), and pre-production (PREPROD) environments.
+Workflow:
+Code is merged into the DEVELOP branch after passing CI checks.
+Deployments to DEV, QA, and PREPROD environments are triggered from this branch.
+Release Branch:
+Purpose: Used for production (PROD) environment deployments.
+Workflow:
+Once code is tested and ready for production, it is merged into the Release branch.
+Deployments to the PROD environment are triggered from this branch.
+Environment Configuration:
+Development (DEV) Environment:
+Used for initial development and testing by developers.
+Frequent deployments and testing cycles.
+Quality Assurance (QA) Environment:
+Used for testing by QA teams.
+Focuses on identifying bugs and ensuring the application meets quality standards.
+Pre-Production (PREPROD) Environment:
+Used for final testing before production.
+Simulates the production environment to identify potential issues.
+Production (PROD) Environment:
+Live environment where the application is available to end-users.
+Deployments are carefully managed to ensure stability and reliability.
+4. Components and Tools
+4.1. Bitbucket
+Description: A Git-based source code repository hosting service.
+Purpose: Facilitates version control and collaboration among developers.
+4.2. Snyk CI
+Description: A security tool for scanning and fixing vulnerabilities in code and dependencies.
+Purpose: Ensures the code is secure before integration.
+4.3. SonarCloud CI
+Description: A cloud-based service for static code analysis.
+Purpose: Assesses code quality by identifying bugs, code smells, and security vulnerabilities.
+4.4. Docker
+Description: An open platform for developing, shipping, and running applications in containers.
+Purpose: Containerizes applications to ensure consistency across multiple environments.
+4.5. Azure Container Registry (ACR)
+Description: A managed Docker container registry service on Azure.
+Purpose: Stores and manages Docker container images.
+4.6. Azure Kubernetes Service (AKS)
+Description: A managed Kubernetes service on Azure.
+Purpose: Orchestrates the deployment, scaling, and management of containerized applications.
+4.7. Azure App Service
+Description: A platform-as-a-service (PaaS) for hosting web applications, RESTful APIs, and mobile backends.
+Purpose: Provides scalable hosting for web applications.
+4.8. Akeyless
+Description: A secrets management service.
+Purpose: Manages and secures credentials, API keys, and other secrets.
