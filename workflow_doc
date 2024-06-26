@@ -1,0 +1,20 @@
+3. Detailed Workflow Description
+3.1. Code Development and Repository Management
+Developer: Developers write and push code to the Bitbucket repository.
+Bitbucket: Serves as the central repository for code storage and version control.
+3.2. Continuous Integration (CI) Pipeline
+Code Vulnerability Check:
+Tool: Snyk CI
+Purpose: Scans the code for security vulnerabilities.
+Code Quality Check:
+Tool: SonarCloud CI
+Purpose: Analyzes the code for quality issues.
+Code Merge:
+Checks failed: PR (Pull Request) is not allowed to merge.
+Checks passed: PR can merge into the DEVELOP branch.
+CI Pipelines:
+Builds: Docker images of the web application and APIs.
+Creates: DACPAC files for database deployments.
+Pushes: Images to Azure Container Registry (ACR) and DACPAC files to Azure Artifact.
+3.3. Continuous Deployment (CD) Pipeline
+Azure Container Registry (ACR): Stores the Docker images.
