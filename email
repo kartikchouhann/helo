@@ -1,0 +1,24 @@
+ Request for Service Principal Creation with VM Contributor Role for Ross CI/CD Pipeline
+
+
+I wanted to provide some context regarding the request for a service principal.
+
+As part of our ongoing work on the *Ross application, we are currently setting up a **CI/CD pipeline* using *Azure DevOps. The goal is to streamline and automate our deployments to ensure faster and more reliable releases. For this setup, we need to create a **service connection* in Azure DevOps that can access our virtual machines, allowing the pipeline to deploy our application seamlessly.
+
+To facilitate this, I would like to request the creation of a service principal with the *"Virtual Machine Contributor"* role. This service principal would specifically need access to the following three VMs:
+
+1. AZR-S-ROSSDB-VM  
+2. AZR-S-SSISDB-VM  
+3. AZR-S-ROSSWB-VM  
+
+Once the service principal is created and the service connection established, it will allow our pipeline to deploy application updates to these VMs automatically, reducing the need for manual intervention and improving overall efficiency.
+
+To move forward with this, I would need the following credentials for the service principal:
+
+1. Subscription ID  
+2. Subscription Name  
+3. Service Principal ID  
+4. Service Principal Key  
+5. Tenant ID  
+
+Thank you for your support in helping us set up this critical piece of the CI/CD pipeline for the Ross application. Please let me know if you need any more details.
