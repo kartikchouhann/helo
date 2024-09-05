@@ -1,0 +1,27 @@
+trigger:
+- main  # Change this to your desired branch
+
+pool:
+  vmImage: 'windows-latest'  # Using a Windows VM as SQLPackage requires Windows
+
+steps:
+# Checkout the code from your repository
+- checkout: self
+
+# Install SQLPackage utility
+- powershell: |
+    Install-Module SqlPackage -Force -AllowClobber
+  displayName: 'Install SQLPackage'
+
+# Build the DACPAC from the SQL script located in your repo
+- powershell: |
+    sqlpackage /action:Extract /sourcefile:$(Build.SourcesDirectory)\path\to\your\sqlscript.sql /targetfile:$(Build.ArtifactStagingDirectory)\yourDatabase.dacpac
+  displayName: 'Build DACPAC from SQL script'
+
+# Publish the DACPAC as a build artifact
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)\yourDatabase.dacpac'
+    artifactName: 'dacpac-artifact'
+    publishLocation: 'Container'
+  displayName: 'Publish DACPAC as Artifact'
