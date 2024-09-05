@@ -1,27 +1,28 @@
 trigger:
-- main  # Change this to your desired branch
+- main  # Adjust according to your branch strategy
 
 pool:
-  vmImage: 'windows-latest'  # Using a Windows VM as SQLPackage requires Windows
+  vmImage: 'windows-latest'  # You can use another image based on your needs
 
 steps:
-# Checkout the code from your repository
-- checkout: self
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '7.x'  # Replace with the version you need
 
-# Install SQLPackage utility
-- powershell: |
-    Install-Module SqlPackage -Force -AllowClobber
-  displayName: 'Install SQLPackage'
+- script: |
+    echo Installing SqlPackage...
+    choco install sqlpackage --version 18.12.1  # Replace with the version you need
+  displayName: 'Install SqlPackage'
 
-# Build the DACPAC from the SQL script located in your repo
-- powershell: |
-    sqlpackage /action:Extract /sourcefile:$(Build.SourcesDirectory)\path\to\your\sqlscript.sql /targetfile:$(Build.ArtifactStagingDirectory)\yourDatabase.dacpac
-  displayName: 'Build DACPAC from SQL script'
+- script: |
+    echo Building DACPAC...
+    SqlPackage.exe /Action:Build /SourceFile:$(Build.SourcesDirectory)/YourProjectFile.sqlproj /TargetFile:$(Build.ArtifactStagingDirectory)/YourDatabase.dacpac
+  displayName: 'Build DACPAC'
 
-# Publish the DACPAC as a build artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)\yourDatabase.dacpac'
-    artifactName: 'dacpac-artifact'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dacpac'
     publishLocation: 'Container'
-  displayName: 'Publish DACPAC as Artifact'
+  displayName: 'Publish DACPAC Artifact'
