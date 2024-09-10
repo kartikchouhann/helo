@@ -1,0 +1,54 @@
+trigger: none
+
+stages:
+- stage: Deploy
+  jobs:
+  - job: DeployToTestVM
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'specific'
+        project: 'ROSS'  # Replace with your project name
+        pipeline: 'CI'
+        runVersion: 'latest'
+        artifact: 'src-artifact'
+        downloadPath: '$(Pipeline.Workspace)/src-artifact'
+      displayName: 'Download Artifact from CI Pipeline'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'DEV_ENV'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          $artifactPath = "$(Pipeline.Workspace)\src-artifact\src.zip"
+          $destinationPath = "C:\Users\nilesh\Downloads\src.zip"
+          $vmName = "testvm"
+          $resourceGroup = "vm-rg"  # Replace with your actual resource group name
+
+          # Check if the file exists locally
+          if (Test-Path -Path $artifactPath) {
+            Write-Output "File found, proceeding with copy."
+          } else {
+            Write-Error "File not found at $artifactPath"
+            exit 1
+          }
+
+          # Upload the file to the VM
+          az vm run-command invoke --command-id RunPowerShellScript --name $vmName --resource-group $resourceGroup --scripts "Copy-Item -Path '$artifactPath' -Destination '$destinationPath' -Force"
+      displayName: 'Copy ZIP to testvm'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'DEV_ENV'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          $destination = "C:\Users\nilesh\Downloads\src.zip"
+          
+          # Unzip the file on the VM
+          az vm run-command invoke --command-id RunPowerShellScript --name testvm --resource-group YourResourceGroupName --scripts "Expand-Archive -Path '$destination' -DestinationPath 'C:\Users\nilesh\Downloads\'"
+      displayName: 'Unzip Files on testvm'
