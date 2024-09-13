@@ -47,3 +47,8 @@ stages:
                     script: |
                       dir C:\Users\nilesh\kk
                   displayName: install docker
+
+
+
+
+az vm run-command invoke --command-id RunPowerShellScript --name "AZR-S-RSSWEB-VM" --resource-group "ae-s-ah-01-rg" --scripts "Invoke-WebRequest -Uri 'https://vstsagentpackage.azureedge.net/agent/3.243.1/vsts-agent-win-x64-3.243.1.zip' -OutFile '.\agent.zip'"
