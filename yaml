@@ -1,1 +1,27 @@
-sqlcmd -S localhost -U TestUser -P StrongPassword123! -d TestDB -Q "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';"
+trigger:
+  branches:
+    include:
+      - main  # Change this to your relevant branch
+
+pool:
+  vmImage: 'ubuntu-latest'  # Use any agent with az cli installed
+
+steps:
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'YourServiceConnectionName'  # Replace with your Azure service connection
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az vm run-command invoke \
+        --command-id RunShellScript \
+        --name YourVMName \
+        --resource-group YourResourceGroupName \
+        --scripts "
+        AGENT_PATH=\$(find / -type d -name 'vsts-agent*' 2>/dev/null) &&
+        cd \$AGENT_PATH &&
+        ./svc.sh stop &&
+        ./config.sh remove --unattended &&
+        ./config.sh --unattended --url https://dev.azure.com/Niles --auth PAT --token FHSUFVHSDOVHNAERGU4689TUR0923-20T --pool Stg --agent YourAgentName &&
+        ./svc.sh install &&
+        ./svc.sh start"
