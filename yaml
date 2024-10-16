@@ -1,27 +1,42 @@
 trigger:
   branches:
+    exclude:
+      - '*'
+
+pr:
+  branches:
     include:
-      - main  # Change this to your relevant branch
+      - develop
 
-pool:
-  vmImage: 'ubuntu-latest'  # Use any agent with az cli installed
+stages:
 
-steps:
-  - task: AzureCLI@2
-    inputs:
-      azureSubscription: 'YourServiceConnectionName'  # Replace with your Azure service connection
-      scriptType: 'bash'
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        az vm run-command invoke \
-        --command-id RunShellScript \
-        --name YourVMName \
-        --resource-group YourResourceGroupName \
-        --scripts "
-        AGENT_PATH=\$(find / -type d -name 'vsts-agent*' 2>/dev/null) &&
-        cd \$AGENT_PATH &&
-        ./svc.sh stop &&
-        ./config.sh remove --unattended &&
-        ./config.sh --unattended --url https://dev.azure.com/Niles --auth PAT --token FHSUFVHSDOVHNAERGU4689TUR0923-20T --pool Stg --agent YourAgentName &&
-        ./svc.sh install &&
-        ./svc.sh start"
+# Stage 1: Snyk Scan - Runs on PR creation for develop branch
+- stage: Snyk_Scan
+  displayName: "Snyk Security Scan"
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+  jobs:
+  - job: snyk_scan
+    displayName: "Run Snyk Scan"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnection: '<your-service-connection>'
+        organization: '<your-snyk-organization>'
+        monitorProjectOnBuild: false
+        failOnIssues: true
+
+# Stage 2: Application Build - Runs on commit to develop branch
+- stage: Build_Application
+  displayName: "Application Build"
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  dependsOn: Snyk_Scan
+  jobs:
+  - job: build_app
+    displayName: "Build Application"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Building the application..."
+      # Add your build steps here
