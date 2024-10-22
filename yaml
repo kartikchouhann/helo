@@ -40,3 +40,30 @@ stages:
     steps:
     - script: echo "Building the application..."
       # Add your build steps here
+
+
+
+
+
+
+trigger:
+  branches:
+    include:
+      - develop
+
+stages:
+  - stage: SnykScan
+    displayName: 'Snyk Code Scan'
+    condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+    jobs:
+      - job: SnykScanJob
+        steps:
+          # Snyk scan steps
+
+  - stage: BuildStage
+    displayName: 'Code Build'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['Build.Reason'], 'Manual'))
+    jobs:
+      - job: BuildJob
+        steps:
+          # Build steps
