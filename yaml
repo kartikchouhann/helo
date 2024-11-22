@@ -1,69 +1,10 @@
-trigger:
-  branches:
-    exclude:
-      - '*'
-
-pr:
-  branches:
-    include:
-      - develop
-
 stages:
-
-# Stage 1: Snyk Scan - Runs on PR creation for develop branch
-- stage: Snyk_Scan
-  displayName: "Snyk Security Scan"
-  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+- stage: Dev
+  condition: or(eq(variables['Resources.TriggeringAlias'], 'devpipeline'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
-  - job: snyk_scan
-    displayName: "Run Snyk Scan"
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: SnykSecurityScan@1
-      inputs:
-        serviceConnection: '<your-service-connection>'
-        organization: '<your-snyk-organization>'
-        monitorProjectOnBuild: false
-        failOnIssues: true
+    - job: BuildJob
+      steps:
+      - script: echo Hello world! 
 
-# Stage 2: Application Build - Runs on commit to develop branch
-- stage: Build_Application
-  displayName: "Application Build"
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-  dependsOn: Snyk_Scan
-  jobs:
-  - job: build_app
-    displayName: "Build Application"
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - script: echo "Building the application..."
-      # Add your build steps here
-
-
-
-
-
-
-trigger:
-  branches:
-    include:
-      - develop
-
-stages:
-  - stage: SnykScan
-    displayName: 'Snyk Code Scan'
-    condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
-    jobs:
-      - job: SnykScanJob
-        steps:
-          # Snyk scan steps
-
-  - stage: BuildStage
-    displayName: 'Code Build'
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['Build.Reason'], 'Manual'))
-    jobs:
-      - job: BuildJob
-        steps:
-          # Build steps
+- stage: Prod
+  condition: or(eq(variables['Resources.TriggeringAlias'], 'prodpipeline'), eq(variables['Build.Reason'], 'Manual'))
