@@ -27,3 +27,17 @@
                     Write-Host "##vso[task.setvariable variable=RollbackPath]$rollbackPath"
                     Write-Host "Using backup from: $rollbackPath"
                 displayName: 'Determine Most Recent Backup Folder'
+
+
+
+
+
+
+
+
+
+
+
+
+
+$rollbackPath = "$(RollbackPath)"
