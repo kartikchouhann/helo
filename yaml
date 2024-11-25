@@ -16,10 +16,19 @@ if (-not (Test-Path -Path $destination)) {
     Write-Host "Created backup folder: $destination"
 }
 
+# Append 'WALGREENS' to the destination path
+$destinationWalgreens = Join-Path -Path $destination -ChildPath "WALGREENS"
+
+# Ensure the WALGREENS folder exists in the dated backup folder
+if (-not (Test-Path -Path $destinationWalgreens)) {
+    New-Item -ItemType Directory -Path $destinationWalgreens -Force
+    Write-Host "Created WALGREENS folder at: $destinationWalgreens"
+}
+
 # Get all files and folders in the source directory, excluding 'log'
 Get-ChildItem -Path $source -Recurse -Exclude "log" | ForEach-Object {
-    # Generate the corresponding target path in the dated backup folder
-    $targetPath = $_.FullName.Replace($source, $destination)
+    # Generate the corresponding target path in the dated backup folder under WALGREENS
+    $targetPath = $_.FullName.Replace($source, $destinationWalgreens)
     
     # Check if the current item is a folder
     if ($_.PsIsContainer) {
@@ -33,4 +42,4 @@ Get-ChildItem -Path $source -Recurse -Exclude "log" | ForEach-Object {
     }
 }
 
-Write-Host "Backup completed. Files are saved in $destination."
+Write-Host "Backup completed. Files are saved in $destinationWalgreens."
