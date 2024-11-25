@@ -1,45 +1,121 @@
-# Define the source directory
-$source = "C:\Users\HP\Desktop\WALGREENS"
+  - stage: Prod_Manual_Rollback
+    displayName: 'Manual Rollback Production'
+    dependsOn: CD_TO_PROD
+    condition: and(always(), eq(variables['Build.Reason'], 'Manual'))
+    jobs:
 
-# Define the base destination directory
-$baseDestination = "C:\Users\HP\Desktop\todAY"
+      - job: Rollback
+        displayName: 'Rollback Job'
+        pool: server
+        steps:
+          - task: ManualValidation@0
+            timeoutInMinutes: '60'
+            inputs: 
+              notifyUsers: |
+                Prajeeth.Babu@cfins.com
+                praful.mhatre@cfins.com
+                venkatanihal.komarashetty@cfins.com
+              instructions: 'Do you want to manually rollback to the previous version?'
+              onTimeout: 'reject'
+            displayName: 'Manual Approval for Rollback'    
+      - deployment: PROD_ROLLBACK
+        displayName: 'Trigger Manual Rollback'
+        dependsOn: Rollback
+        condition: succeeded()
+        environment:
+          name: PROD
+          resourceName: AZR-P-ROSSWB-VM         
+          resourceType: VirtualMachine
+        strategy:
+          runOnce:
+            deploy:
+              steps:             
+                - task: CmdLine@2
+                  inputs:
+                    script: |
+                      dir C:\RossCodeBackup\ROSS
+                  displayName: verify Backup Artifacts
 
-# Get the current date in yyyy-MM-dd format for the folder name
-$currentDate = Get-Date -Format "yyyy-MM-dd"
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Stop-Service -Name 'w3svc'
+                  displayName: 'Stopping IIS Service'
 
-# Define the destination directory with the current date
-$destination = Join-Path -Path $baseDestination -ChildPath $currentDate
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Get-Service -Name 'w3svc'
+                  displayName: 'Getting IIS Service Status'
 
-# Ensure the dated backup folder exists
-if (-not (Test-Path -Path $destination)) {
-    New-Item -ItemType Directory -Path $destination -Force
-    Write-Host "Created backup folder: $destination"
-}
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\app" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying Webapp'
 
-# Append 'WALGREENS' to the destination path
-$destinationWalgreens = Join-Path -Path $destination -ChildPath "WALGREENS"
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\accountingAdminService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying accountingAndReportingService'
 
-# Ensure the WALGREENS folder exists in the dated backup folder
-if (-not (Test-Path -Path $destinationWalgreens)) {
-    New-Item -ItemType Directory -Path $destinationWalgreens -Force
-    Write-Host "Created WALGREENS folder at: $destinationWalgreens"
-}
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\actuarialService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying actuarialService'
 
-# Get all files and folders in the source directory, excluding 'log'
-Get-ChildItem -Path $source -Recurse -Exclude "log" | ForEach-Object {
-    # Generate the corresponding target path in the dated backup folder under WALGREENS
-    $targetPath = $_.FullName.Replace($source, $destinationWalgreens)
-    
-    # Check if the current item is a folder
-    if ($_.PsIsContainer) {
-        # Create the folder in the destination
-        if (-not (Test-Path -Path $targetPath)) {
-            New-Item -ItemType Directory -Force -Path $targetPath
-        }
-    } else {
-        # Copy the file to the destination
-        Copy-Item -Path $_.FullName -Destination $targetPath -Force
-    }
-}
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\adminService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying adminService'
 
-Write-Host "Backup completed. Files are saved in $destinationWalgreens."
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\premiumAuditService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying auditPremiumService'
+
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\claimsAuditService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying claimsAuditService'
+
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\litigationService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying litigationService'
+
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Copy-Item -Path "C:\RossCodeBackup\ROSS\underwritingService" -Destination "C:\Web\ROSS" -Recurse -Force
+                  displayName: 'Deploying underWritingService'
+
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Start-Service -Name 'w3svc'
+                  displayName: 'Starting IIS Service'
+
+                - task: PowerShell@2
+                  inputs:
+                    targetType: 'inline'
+                    script: |
+                      Get-Service -Name 'w3svc'
+                  displayName: 'Getting IIS Service Status'
