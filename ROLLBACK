@@ -1,62 +1,29 @@
-# Define the base path where backups are stored
-$backupBasePath = "C:\Users\HP\Desktop\todAY"
+              - task: PowerShell@2
+                inputs:
+                  targetType: 'inline'
+                  script: |
+                    $backupBasePath = "C:\RossCodeBackup\ROSS"
+                    
+                    # Ensure the backup base path exists
+                    if (-not (Test-Path -Path $backupBasePath)) {
+                        Write-Error "Backup base path does not exist: $backupBasePath"
+                        exit 1
+                    }
 
-# Ensure the backup directory exists
-if (-not (Test-Path -Path $backupBasePath)) {
-    Write-Error "The specified backup base path does not exist: $backupBasePath"
-    exit 1
-}
-
-# Get the most recent backup folder based on the folder name
-$mostRecentBackup = Get-ChildItem -Path $backupBasePath -Directory | 
-                    Sort-Object -Property Name -Descending | 
-                    Select-Object -First 1
-
-# Check if a backup folder was found
-if (-not $mostRecentBackup) {
-    Write-Error "No backup folders found in $backupBasePath"
-    exit 1
-}
-
-# Get the full path of the most recent backup folder
-$rollbackPath = $mostRecentBackup.FullName
-
-# Output the result
-Write-Host "Using backup from: $rollbackPath"
-
-# (Optional) Set a mock Azure DevOps pipeline variable for testing
-Write-Host "##vso[task.setvariable variable=RollbackPath]$rollbackPath"
-
-# Test if you can access the folder and its contents
-Write-Host "Listing contents of the most recent backup folder:"
-Get-ChildItem -Path $rollbackPath
-
-# Define the destination path
-$destinationPath = "C:\Users\HP\Desktop\rollback"
-
-# Ensure the destination path exists
-if (-not (Test-Path -Path $destinationPath)) {
-    New-Item -ItemType Directory -Force -Path $destinationPath
-}
-
-# Remove all existing files and folders in the destination directory
-Write-Host "Clearing destination folder: $destinationPath"
-Get-ChildItem -Path $destinationPath -Recurse | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-
-# Copy files and folders from the most recent backup to the destination
-Write-Host "Copying backup to destination folder: $destinationPath"
-Get-ChildItem -Path $rollbackPath -Recurse | ForEach-Object {
-    $targetPath = $_.FullName.Replace($rollbackPath, $destinationPath)
-    
-    if ($_.PsIsContainer) {
-        # Create the folder in the destination if it doesn't exist
-        if (-not (Test-Path -Path $targetPath)) {
-            New-Item -ItemType Directory -Force -Path $targetPath
-        }
-    } else {
-        # Copy the file to the destination
-        Copy-Item -Path $_.FullName -Destination $targetPath -Force
-    }
-}
-
-Write-Host "Rollback completed. Backup restored to $destinationPath"
+                    # Get the most recent folder based on creation time
+                    $mostRecentBackup = Get-ChildItem -Path $backupBasePath -Directory | 
+                                        Sort-Object -Property CreationTime -Descending | 
+                                        Select-Object -First 1
+                    
+                    # Check if we found a backup folder
+                    if (-not $mostRecentBackup) {
+                        Write-Error "No backup folders found in $backupBasePath"
+                        exit 1
+                    }
+                    
+                    $rollbackPath = $mostRecentBackup.FullName
+                    
+                    # Set the rollback path as a pipeline variable
+                    Write-Host "##vso[task.setvariable variable=RollbackPath]$rollbackPath"
+                    Write-Host "Using backup from: $rollbackPath"
+                displayName: 'Determine Most Recent Backup Folder'
