@@ -1,4 +1,6 @@
-    - task: ManualValidation@0
+    - task: PowerShell@2
       inputs:
-        instructions: 'STG stage deployment is complete.'
-      displayName: 'Notify STG Stage Completion'
+        targetType: 'inline'
+        script: |
+          Write-Host "Sending notification..."
+          Send-MailMessage -From "ci-cd-notify@yourcompany.com" -To "team@yourcompany.com" -Subject "STG Stage Completed" -Body "The STG stage of the pipeline is successfully completed."
