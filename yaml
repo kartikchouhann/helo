@@ -1,5 +1,4 @@
-  jobs:
-  - job: NotifySTGCompletion
-    steps:
-    - script: echo "STG stage deployment is complete."
+    - task: ManualValidation@0
+      inputs:
+        instructions: 'STG stage deployment is complete.'
       displayName: 'Notify STG Stage Completion'
