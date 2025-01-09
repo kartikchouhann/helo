@@ -1,6 +1,28 @@
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          Write-Host "Sending notification..."
-          Send-MailMessage -From "ci-cd-notify@yourcompany.com" -To "team@yourcompany.com" -Subject "STG Stage Completed" -Body "The STG stage of the pipeline is successfully completed."
+trigger:
+  branches:
+    include:
+      - develop
+      - release*
+  paths:
+    include:
+      - Database/Staging/DBScripts/SSISDB/**
+      - Database/Production/DBScripts/SSISDB/**
+
+jobs:
+- job: StagingJob
+  displayName: 'Trigger Staging Pipeline'
+  condition: and(
+    startsWith(variables['Build.SourceBranch'], 'refs/heads/develop'),
+    contains(variables['Build.TriggeredByPaths'], 'Database/Staging/DBScripts/SSISDB/')
+  )
+  steps:
+    - script: echo "This is the staging pipeline trigger."
+
+- job: ProductionJob
+  displayName: 'Trigger Production Pipeline'
+  condition: and(
+    startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
+    contains(variables['Build.TriggeredByPaths'], 'Database/Production/DBScripts/SSISDB/')
+  )
+  steps:
+    - script: echo "This is the production pipeline trigger."
