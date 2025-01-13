@@ -1,28 +1,115 @@
-trigger:
-  branches:
-    include:
-      - develop
-      - release*
-  paths:
-    include:
-      - Database/Staging/DBScripts/SSISDB/**
-      - Database/Production/DBScripts/SSISDB/**
+1. Coherent Spark Details
+a. API Authentication
+Bearer Token:
 
-jobs:
-- job: StagingJob
-  displayName: 'Trigger Staging Pipeline'
-  condition: and(
-    startsWith(variables['Build.SourceBranch'], 'refs/heads/develop'),
-    contains(variables['Build.TriggeredByPaths'], 'Database/Staging/DBScripts/SSISDB/')
-  )
-  steps:
-    - script: echo "This is the staging pipeline trigger."
+A valid Bearer Token for authenticating Export and Import API calls.
+Can be stored securely in Azure DevOps as a pipeline secret.
+API Key (Alternative):
 
-- job: ProductionJob
-  displayName: 'Trigger Production Pipeline'
-  condition: and(
-    startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
-    contains(variables['Build.TriggeredByPaths'], 'Database/Production/DBScripts/SSISDB/')
-  )
-  steps:
-    - script: echo "This is the production pipeline trigger."
+x-synthetic-key: API Key value with necessary permissions.
+x-tenant-name: Tenant name associated with the API key.
+Permissions Needed:
+
+API Key must be associated with groups that have:
+Spark.Exports.json permission
+Spark.AllEncompassingProxy.json permission
+b. Tenant and Environment Details
+Tenant Name ({tenant}):
+
+The specific tenant for the Spark services (from Spark login URL or User menu).
+Environment ({environment}):
+
+The deployment environment (prod, staging, uat).
+Base API URL:
+
+Format: https://excel.{environment}.coherent.global/{tenant}/api/v4
+c. Services and Folders for Export
+Folders:
+
+List of folders that contain the services to be exported.
+Services:
+
+Services to export in folder/service format.
+Example: "myfolder/myservice" or "myfolder/myservice[1.2.3]"
+Service IDs (Optional):
+
+Unique service identifiers for more precise export.
+Version Filter:
+
+Specify which versions to export (all or latest).
+File Filter (Optional):
+
+Define what files to export (migrate or onpremises).
+WebAssembly Compilation:
+
+Ensure services have compiled Neuron WebAssembly modules.
+d. Export Package Configuration
+Package Size Limit:
+
+Confirm the exported ZIP file will not exceed 200 MB.
+Export File Name (Optional):
+
+Custom name for the exported ZIP file.
+Correlation ID (Optional):
+
+Used to track specific export requests.
+Source System Tag (Optional):
+
+Developer tag for identifying the source system (e.g., mycicd).
+2. Azure DevOps Details
+a. Azure DevOps Setup
+Azure DevOps Project:
+
+Ensure an active project exists for configuring the pipeline.
+Service Connection (Optional):
+
+If deploying to Azure resources, create a Service Principal with proper roles.
+b. Pipeline Configuration
+Variable Group for Secure Data:
+
+Store API tokens, keys, and tenant details securely.
+Example Variables:
+ExportApiToken → Bearer token for Export API
+ImportApiToken → Bearer token for Import API
+TenantName → Spark tenant name
+Environment → Spark environment
+Pipeline Agent:
+
+Use Microsoft-hosted agents (e.g., ubuntu-latest) or configure a self-hosted agent if a private network is involved.
+c. CI/CD Workflow
+CI Pipeline:
+
+Validate inputs.
+Call the Export API to trigger the export.
+Poll the status until the export is complete.
+Download and publish the exported ZIP file as a pipeline artifact.
+CD Pipeline:
+
+Download the exported artifact.
+Use the Import API to deploy it to the target environment.
+Validate the deployment.
+3. Testing and Access
+API Access:
+Test Export and Import API calls with Postman or a Python script.
+Error Handling:
+Handle failed exports (due to missing services, folder errors, or permissions).
+Monitoring:
+Use Azure DevOps logs to monitor API responses and job statuses.
+4. Final Checklist for CI/CD Implementation
+Requirement	Details Needed
+Authentication	Bearer Token or API Key with required permissions.
+Tenant Name	Spark tenant name.
+Environment	Target deployment environment (prod, staging).
+API Endpoints	Export and Import API URLs.
+Folders and Services	List of folders and services for export.
+Service Versions	Export all versions or latest version.
+File Filters	Define which files to include (migrate, onpremises).
+Package Size Limit	Verify export package does not exceed 200 MB.
+Variable Group	Azure DevOps variables for tokens and configuration.
+Pipeline Agent	Microsoft-hosted or self-hosted.
+Service Connection (Azure)	If deploying to Azure, set up a Service Principal.
+Testing Access	API access validation for Export/Import.
+Action Items for Manager
+Provide Access to API Tokens or API Keys with proper permissions.
+Confirm Tenant and Environment Names for the Spark deployment.
+List of Folders and Services that need to be exported and deployed
