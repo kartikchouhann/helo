@@ -1,107 +1,25 @@
-Jira Automation & Workflow Optimization
-Introduction
-Jira is a powerful project management tool, but manual issue tracking, approvals, and sprint monitoring can be time-consuming and prone to human error. By implementing Jira Automation & Workflow Optimization, teams can streamline their issue management processes, improve efficiency, and ensure compliance with predefined rules.
-
-This project will introduce four key automation features:
-
-Auto-Issue Escalation – Automatically escalate issues if they stay unresolved for too long.
-Sprint Health Monitor – A real-time dashboard to track sprint progress, blockers, and issue statuses.
-Custom SLA Tracking for Jira – Define SLA (Service Level Agreement) rules and track compliance based on issue types.
-Jira Auto-Approval Workflow – Automate approvals for specific issue types based on predefined conditions.
-By integrating these features, we can reduce manual effort, improve project visibility, and ensure smoother workflows within Jira.
-
-Detailed Explanation
-1. Auto-Issue Escalation
-Problem Statement:
-Critical issues often get delayed due to lack of follow-up.
-No automated system to alert managers about high-priority unresolved issues.
-Solution:
-Set up Jira automation rules that escalate issues based on predefined conditions (e.g., high-priority issues unresolved for 3 days).
-Automatically send notifications to managers or reassign the issue to ensure it is addressed promptly.
-Implementation:
-Create Jira automation rules that trigger based on:
-Issue priority (e.g., High, Critical).
-Time elapsed in a specific status (e.g., more than 48 hours in "In Progress").
-Lack of updates from assignee.
-Automate issue escalation, reassignment, or notifications to relevant stakeholders.
-2. Sprint Health Monitor
-Problem Statement:
-Teams often lack visibility into sprint progress and blockers.
-Manual sprint reporting is time-consuming and inefficient.
-Solution:
-Develop a custom Jira dashboard that provides real-time insights into:
-Open tasks, completed tasks, and blockers.
-Sprint burndown charts.
-Issue resolution trends.
-Helps teams make data-driven decisions and stay on track.
-Implementation:
-Use Jira Query Language (JQL) to filter sprint data.
-Build a dashboard using Jira reports, charts, and widgets.
-Automate daily sprint health updates via Slack or email.
-3. Custom SLA Tracking for Jira
-Problem Statement:
-Teams often struggle to track whether tickets are resolved within the required time frame.
-Manual SLA tracking is inefficient and prone to human error.
-Solution:
-Define SLA rules for different issue types (e.g., P1 bugs must be resolved in 4 hours).
-Automate SLA breach alerts when deadlines approach.
-Track SLA compliance via custom Jira reports.
-Implementation:
-Define SLA rules based on:
-Issue type (e.g., Bug, Task, Story).
-Priority levels (e.g., P1, P2, P3).
-Time spent in each status.
-Use Jira Service Management (JSM) or a custom script to track SLAs.
-Automate reminders and breach alerts via email or Slack.
-4. Jira Auto-Approval Workflow
-Problem Statement:
-Manual approval processes slow down issue resolution.
-Lack of consistency in approval workflows.
-Solution:
-Automate approval workflows for specific issue types (e.g., feature requests, change requests).
-Define approval conditions (e.g., auto-approve changes if the risk level is low).
-Send automated approval notifications to managers when manual approval is needed.
-Implementation:
-Use Jira automation rules to trigger approvals based on:
-Issue type and priority.
-Risk assessment score.
-Approval from a predefined list of approvers.
-Send notifications and update Jira issue status automatically.
-Roadmap
-Phase 1: Research & Planning (Week 1-2)
-Define requirements for each automation feature.
-Identify Jira automation rules, scripts, or plugins needed.
-Gather feedback from project managers and developers on pain points.
-Phase 2: Development & Implementation (Week 3-6)
-Set up Jira automation rules for issue escalation and approval workflows.
-Develop the Sprint Health Monitor dashboard using Jira dashboards and JQL.
-Implement SLA tracking and breach alerts.
-Phase 3: Testing & Optimization (Week 7-8)
-Run test cases for each automation rule and dashboard.
-Optimize rules and refine dashboards based on user feedback.
-Train teams on using the new Jira automation features.
-Phase 4: Deployment & Monitoring (Week 9-10)
-Deploy automation rules and dashboards across Jira projects.
-Monitor effectiveness and performance of the implemented features.
-Make improvements based on real-world usage.
-What We Achieve by Doing This
-1. Increased Productivity & Efficiency
-Automating approvals and escalations reduces manual intervention.
-Sprint monitoring improves team performance and visibility.
-2. Faster Issue Resolution
-SLA tracking ensures issues are resolved within defined time limits.
-Auto-approvals prevent delays in development workflows.
-3. Improved Transparency & Compliance
-Sprint Health Monitor provides real-time visibility into sprint progress.
-SLA compliance tracking ensures teams meet business requirements.
-4. Reduced Risk & Better Decision-Making
-Auto-Issue Escalation prevents critical issues from being ignored.
-Managers can make data-driven decisions using sprint analytics.
-Conclusion
-By implementing Jira Automation & Workflow Optimization, we streamline project management, improve issue resolution times, and ensure teams stay on track. These enhancements will lead to faster deployments, better collaboration, and more efficient sprint planning, making Jira a more powerful tool for agile teams. 🚀
+AAN (Prod): https://admin.atlassian.com/s/8e83c2b4-97ae-4335-8a8f-bbdff09d62dd/users?referrerName=JIRA
+AAN (Sandbox): https://admin.atlassian.com/s/a7a439d8-9a79-4ff3-9b2c-981d3ec04a1e/users?referrerName=JIRA
+Bitbucket: https://bitbucket.org/appfire/workspace/settings
+Snyk: https://app.snyk.io/group/e3cdd5e9-db9f-477a-9e1c-4fbfbdf6aa16/manage/members
+DockerHub: https://hub.docker.com/orgs/bobswiftapps/members
+JetBrains: https://account.jetbrains.com/organization/6304600
+Ngrok: https://dashboard.ngrok.com/team-members
+GitHub:
+Nexus: https://nexus.appfire.com/#browse/welcome
+Heroku: https://dashboard.heroku.com/enterprise/appfire-enterprise/access
+short.io: https://app.short.io/users/dashboard/403043/links
 
 
-
-https://chatgpt.com/share/67a9d15d-f268-8000-adaf-b7a79fe0c923
-
-
+Email:          - 
+AAN (Prod)      - Account Disabled
+AAN (Sandbox)   - Account Disabled
+BitBucket       - User not present
+Snyk            - User not present
+DockerHub       - User not present
+JetBrains       - User not present
+Ngrok           - User not present
+GitHub          - user not present
+Nexus           - User not present
+Heroku          - User not present
+short.io        - User not present
