@@ -1,1 +1,1 @@
-https://chatgpt.com/share/67aedf2a-8b04-8000-ba38-8981b76ae634
+mvn install:install-file -DgroupId=com.keplerrominfo.jira.plugins -DartifactId=kepler-jira-parent -Dversion=2.10.0.4-SNAPSHOT -Dpackaging=pom -Dfile=/path/to/kepler-jira-parent/pom.xml
