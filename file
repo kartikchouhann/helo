@@ -1,0 +1,9 @@
+We are currently in the process of provisioning a new member account under our AWS Organization using the CreateAccount API. However, the operation is failing with the following error:
+
+makefile
+Copy
+Edit
+ConstraintViolationException: You have exceeded the allowed number of AWS accounts.
+As part of our ongoing business and project needs, we require the ability to create additional accounts under our organization. I would like to request an increase in the account limit for our organization to allow for the creation of new member accounts.
+
+Please let us know the maximum number of accounts that can be granted, and any additional information or actions required from our side to process this request.
