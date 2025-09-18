@@ -1,4 +1,7 @@
- I’m moving this back to in-progress.  It does not address all of the permission issues that were identified such as access to all secrets and APIs
+or now, i reverted the changes (until tested) so that i can deploy Carlos' changes
+
+
+I’m moving this back to in-progress.  It does not address all of the permission issues that were identified such as access to all secrets and APIs
 
 arn:aws:secretsmanager:${region}:${account_id}:secret:*
 arn:aws:iam::aws:policy/SecretsManagerReadWrite
