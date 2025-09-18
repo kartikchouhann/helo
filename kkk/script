@@ -92,3 +92,103 @@
 
 
 src\terraform\pulse\security\iam\role_policies\pulse-cluster-task-execution-role-policy.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"Resource": [
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/accesskey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/accesskeysecret/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/alerts/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/auth/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feed/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feednext/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/herd/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/monolith/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/onpremise-sync/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/ops/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/parlors/redis/connection-string/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/auth/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/parlors/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/ops/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/jobsrunner/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feed/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/herd/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/mysql/migrations/connection/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/auth/mysql/readonly-connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feed/mysql/readonly-connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/herd/mysql/readonly-connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/mysql/readonly-connection-string/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/certificates/vas-com/password/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/email/username/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/email/password/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/partners/apikey/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/alerts/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/auth/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feed/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feednext/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/herd/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/monolith/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/onpremise-sync/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/ops/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/parlors/raygun/apikey/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/alerts/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/auth/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feed/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/feednext/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/herd/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/monolith/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/onpremise-sync/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/ops/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/parlors/seq/apikey/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/slack/webhook/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/scotmoves/username/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/scotmoves/password/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/scotmoves/apikey/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/google-geocoding/apikey/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/sdk/storage/accesskey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/sdk/storage/secretkey/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/sdk/accesskey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/sdk/accesskeysecret/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics-etl/mysql/urus-connections-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/mysql/connection-string/*",
+
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/c2c/shared-secret/*"
+]
