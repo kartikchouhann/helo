@@ -1,1 +1,1 @@
-grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ | awk -F'[$}{]' '{print $2}' | sort -u
+grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ | cut -d'$' -f2 | cut -d'}' -f1 | sort -u
