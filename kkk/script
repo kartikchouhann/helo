@@ -34,6 +34,14 @@ echo
 echo "📋 ECS secrets used (from task defs):"
 cat /tmp/ecs_secrets.txt
 
+
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
+$ ./script.sh
+🔍 Extracting secrets used in ECS task definitions…
+sed: -e expression #1, char 35: Invalid content of \{\}
+
+
 echo
 echo "📋 Terraform secrets defined:"
 cat /tmp/terraform_secrets.txt
