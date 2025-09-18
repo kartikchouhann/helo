@@ -1,3 +1,29 @@
+## Background [DEVOPS-3219]
+The ECS task execution role policy was previously using a wildcard (`*`) in Secrets Manager access, which was overly permissive.  
+
+As part of this update, I identified all ECS-related secrets by:
+- Grepping ECS task definition `valueFrom` references.
+- Mapping those variables to the corresponding Terraform-managed secrets.
+- Verifying against the existing secrets in our repo and AWS account.
+
+I then replaced the wildcard in `pulse-cluster-task-execution-role-policy.json` with explicit ARNs for each required secret. This ensures the role now only has access to the exact secrets ECS services need.
+
+## Pending
+- No pending work. The policy is now least-privileged.
+- Further refinements, if any new ECS services are added, will require updating this list.
+
+## Diagrams and Screenshots
+N/A (policy change only).
+
+## Checklist
+- [x] Verified secrets list via grep + Terraform references.
+- [x] Updated IAM role policy to reference exact ARNs.
+- [x] Validated JSON syntax.
+- [ ] Deployed to sandbox to confirm ECS task execution is not broken.
+
+
+
+
 Update ECS task execution role policy with explicit secret ARNs instead of wildcard (DEVOPS-3219)
 
 
