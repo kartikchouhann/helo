@@ -1,7 +1,3 @@
-Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
-$ grep -ho '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/alerts-microservice/container_definition/container_definition.json \
-  | sed -E 's/.*\${\(secret_[^}]*\).*/\1/'
-sed: -e expression #1, char 29: Invalid content of \{\}
-
-Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
-$
+grep -Rho '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
+  | sed -E 's/.*\${secret_([^}]*)}.*/secret_\1/' \
+  | sort -u > ecs_secret_keys.txt
