@@ -1,3 +1,1 @@
-grep -Rho '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
-  | sed -E 's/.*\${secret_([^}]*)}.*/secret_\1/' \
-  | sort -u > ecs_secret_keys.txt
+grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ | awk -F'[$}{]' '{print $2}' | sort -u
