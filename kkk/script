@@ -1,3 +1,6 @@
+poke to Lars about this in standup.  We decided to wait until after migrations so we aren't trying to jungle too many things.  Salma as we discussed please work with Sheela to create a new post-migration ticket to address these permission issues and please include the list of secrets that you gathered.
+thanks!
+
 or now, i reverted the changes (until tested) so that i can deploy Carlos' changes
 
 
