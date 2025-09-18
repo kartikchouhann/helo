@@ -1,3 +1,9 @@
+ I’m moving this back to in-progress.  It does not address all of the permission issues that were identified such as access to all secrets and APIs
+
+arn:aws:secretsmanager:${region}:${account_id}:secret:*
+arn:aws:iam::aws:policy/SecretsManagerReadWrite
+AmazonAPIGatewayAdministrator
+
 Hi Alex — I’d like to open a group chat with you, Caleb, and Matias to review the ECS secrets list I compiled. Could you please share Matias’ email/contact so I can include him?  
 
 Hi all — I’ve created the PR for DEVOPS-3219.  
