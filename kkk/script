@@ -1,3 +1,19 @@
+Hi Sheela, following up on Alex’s note — we need to create a new post-migration ticket to address the ECS task execution role permission issues. I’ve already compiled the full list of required secrets, and I’ll include that in the new ticket. Can we work together to get this ticket created?
+
+
+Title: Scope down ECS Task Execution Role Secret Access (Post-Migration)
+
+Background:
+During review of src/terraform/pulse/security/iam/role_policies/pulse-cluster-task-execution-role-policy.json, we identified that the ECS task execution role currently has overly permissive access to Secrets Manager (wildcard service/*). This poses a risk as the role may access secrets it does not require.
+
+Task:
+
+Restrict ECS task execution role to only the secrets actually required by ECS tasks.
+
+Use the compiled list of secrets (see below) instead of wildcard access.
+
+
+
 poke to Lars about this in standup.  We decided to wait until after migrations so we aren't trying to jungle too many things.  Salma as we discussed please work with Sheela to create a new post-migration ticket to address these permission issues and please include the list of secrets that you gathered.
 thanks!
 
