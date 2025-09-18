@@ -1,5 +1,9 @@
-grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ \
-  | cut -d'$' -f2 \
-  | cut -d'}' -f1 \
-  | tr -d '{' \
-  | sort -u
+for s in $(grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ \
+            | cut -d'$' -f2 \
+            | cut -d'}' -f1 \
+            | tr -d '{' \
+            | sort -u); do
+  echo "🔑 $s"
+  grep -R "$s" src/terraform/pulse/security/secrets-manager/ --include="*.tfvars"
+  echo
+done
