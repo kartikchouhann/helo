@@ -1,3 +1,6 @@
+Update ECS task execution role policy with explicit secret ARNs instead of wildcard (DEVOPS-3219)
+
+
 ok.  can you please test these changes in a lower env to make sure they work? (edited) 
 
 
