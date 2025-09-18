@@ -1,1 +1,28 @@
-grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ | cut -d'$' -f2 | cut -d'}' -f1 | sort -u
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
+$ grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ | cut -d'$' -f2 | cut -d'}' -f1 | sort -u
+{secret_AwsAccessKey
+{secret_AwsRedisUrl
+{secret_AwsSecretKey
+{secret_DefaultConnection
+{secret_GeneticsConnection
+{secret_KeyStorePassword
+{secret_MessagingSdkAwsAccessKey
+{secret_MessagingSdkAwsSecretKey
+{secret_PartnersApiKey
+{secret_RaygunApiKey
+{secret_ReadonlyConnection
+{secret_ScotMovesApiKey
+{secret_ScotMovesPassword
+{secret_ScotMovesUsername
+{secret_SdkAwsAccessKey
+{secret_SdkAwsSecretKey
+{secret_SdkGeocoding
+{secret_SerilogApiKey
+{secret_SlackWebhook
+{secret_StorageSdkAwsAccessKey
+{secret_StorageSdkAwsSecretKey
+{secret_UrusConnection
+{secret_c2c_shared_secret
+{secret_email_password
+{secret_email_username
+
