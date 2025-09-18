@@ -1,3 +1,7 @@
+GM Salma, how did you determine the appropriate permissions for this role and what is using this role?
+
+
+
 "Resource": [
   "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/accesskey/*",
   "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/accesskeysecret/*",
