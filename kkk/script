@@ -1,3 +1,6 @@
+I scoped the role using the AWS-recommended Elastic Beanstalk service-role policies instead of the broad admin policy.
+This role is specifically used for Elastic Beanstalk deployments, while instance roles continue to handle any app-specific permissions.
+
 GM Salma, how did you determine the appropriate permissions for this role and what is using this role?
 
 
