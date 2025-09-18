@@ -1,64 +1,25 @@
-
-Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
-$ for s in $(grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ \
-            | cut -d'$' -f2 \
-            | cut -d'}' -f1 \
-            | tr -d '{' \
-            | sort -u); do
-  echo "🔑 $s"
-  grep -R "$s" src/terraform/pulse/security/secrets-manager/ --include="*.tfvars"
-  echo
-done
-🔑 secret_AwsAccessKey
-
-🔑 secret_AwsRedisUrl
-
-🔑 secret_AwsSecretKey
-
-🔑 secret_DefaultConnection
-
-🔑 secret_GeneticsConnection
-
-🔑 secret_KeyStorePassword
-
-🔑 secret_MessagingSdkAwsAccessKey
-
-🔑 secret_MessagingSdkAwsSecretKey
-
-🔑 secret_PartnersApiKey
-
-🔑 secret_RaygunApiKey
-
-🔑 secret_ReadonlyConnection
-
-🔑 secret_ScotMovesApiKey
-
-🔑 secret_ScotMovesPassword
-
-🔑 secret_ScotMovesUsername
-
-🔑 secret_SdkAwsAccessKey
-
-🔑 secret_SdkAwsSecretKey
-
-🔑 secret_SdkGeocoding
-
-🔑 secret_SerilogApiKey
-
-🔑 secret_SlackWebhook
-
-🔑 secret_StorageSdkAwsAccessKey
-
-🔑 secret_StorageSdkAwsSecretKey
-
-🔑 secret_UrusConnection
-
-🔑 secret_c2c_shared_secret
-
-🔑 secret_email_password
-
-🔑 secret_email_username
-
-
-Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
-$
+"Resource": [
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/accesskey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/accesskeysecret/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/*/redis/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/*/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/*/mysql/readonly-connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/certificates/vas-com/password/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/email/username/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/email/password/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/partners/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/*/raygun/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/*/seq/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/slack/webhook/*/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/scotmoves/username/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/scotmoves/password/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/scotmoves/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/google-geocoding/apikey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/sdk/storage/accesskey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/sdk/storage/secretkey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/sdk/accesskey/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/pulse/aws/sdk/accesskeysecret/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics-etl/mysql/urus-connections-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/mysql/connection-string/*",
+  "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/c2c/shared-secret/*"
+]
