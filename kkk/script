@@ -1,14 +1,5 @@
-echo '"Resource": [' > ecs_secrets.json
-for s in $(grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ \
-            | cut -d'$' -f2 \
-            | cut -d'}' -f1 \
-            | tr -d '{' \
-            | sort -u); do
-  grep -R "$s" src/terraform/pulse/security/secrets-manager/ --include="*.tfvars" \
-    | awk -F'=' '{print $2}' \
-    | tr -d ' "' \
-    | awk '{print "\""$1"\","}' >> ecs_secrets.json
-done
-# remove trailing comma on last line and close the array
-sed -i '$ s/,$//' ecs_secrets.json
-echo ']' >> ecs_secrets.json
+grep -R '"valueFrom"' src/terraform/pulse/compute/ecs/fargate/ \
+  | cut -d'$' -f2 \
+  | cut -d'}' -f1 \
+  | tr -d '{' \
+  | sort -u
