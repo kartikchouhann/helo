@@ -23,3 +23,72 @@
   "arn:aws:secretsmanager:${region}:${account_id}:secret:service/genetics/mysql/connection-string/*",
   "arn:aws:secretsmanager:${region}:${account_id}:secret:service/general/c2c/shared-secret/*"
 ]
+
+
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowWriteLogs",
+            "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:logs:${region}:${account_id}:log-group:/aws/ecs/fargate/service/*"
+        },
+        {
+            "Sid": "AllowECRActions",
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowGetECRImages",
+            "Action": [
+                "ecr:DescribeRepositories",
+                "ecr:DescribeImages",
+                "ecr:ListImages",
+                "ecr:GetRepositoryPolicy",
+                "ecr:BatchCheckLayerAvailability"
+            ],
+            "Effect": "Allow",
+            "Resource": ${ecr_repo_list}
+        },
+        {
+            "Sid": "SecretManagerAccess",
+            "Action": [
+                "kms:Decrypt",
+                "secretsmanager:GetSecretValue"
+            ],
+            "Effect": "Allow",
+            "Resource": [ 
+                "arn:aws:secretsmanager:${region}:${account_id}:secret:service/*",
+                "arn:aws:kms:${region}:${account_id}:key/${kms_alias}"
+            ]
+        },
+        {
+            "Sid": "DenyDeleteAllBuckets",
+            "Action": [
+              "s3:DeleteBucket"
+            ],
+            "Effect": "Deny",
+            "Resource": [
+              "arn:aws:s3:::*"
+            ]
+        }
+    ]
+}
+
+
+src\terraform\pulse\security\iam\role_policies\pulse-cluster-task-execution-role-policy.json
