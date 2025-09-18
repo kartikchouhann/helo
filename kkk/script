@@ -1,3 +1,6 @@
+ok.  can you please test these changes in a lower env to make sure they work? (edited) 
+
+
 I scoped the role using the AWS-recommended Elastic Beanstalk service-role policies instead of the broad admin policy.
 This role is specifically used for Elastic Beanstalk deployments, while instance roles continue to handle any app-specific permissions.
 
