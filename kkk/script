@@ -1,3 +1,9 @@
+Hi all — I’ve created the PR for DEVOPS-3219.  
+I reviewed all ECS task definitions, extracted the secrets from `valueFrom`, mapped them to our Terraform-managed secrets, and updated the execution role policy to use explicit ARNs instead of a wildcard.  
+
+Now I’d like to validate the final secrets list with you, Caleb/Matias, to make sure nothing is missing. Could you please review and confirm?  
+
+
 ## Background [DEVOPS-3219]
 The ECS task execution role policy was previously using a wildcard (`*`) in Secrets Manager access, which was overly permissive.  
 
