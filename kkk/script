@@ -4,44 +4,36 @@ set -euo pipefail
 echo "🔍 Extracting secrets used in ECS task definitions…"
 
 # 1. Grab all valueFrom secrets (e.g., ${secret_DefaultConnection})
-grep -Roh '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
-  | sed -E 's/.*\${secret_([^}]*)}.*/secret_\1/' \
-  | sort -u > /tmp/ecs_secrets.txt
+grep -Roh '"valueFrom": *"\${secret_[^"]*}"' src/terraform/pulse/compute/ecs/fargate/ \
+  | sed -E 's/.*\${(secret_[^}]*)}.*/\1/' \
+  | sort -u > ecs_secrets.txt
 
-echo "✅ Found $(wc -l < /tmp/ecs_secrets.txt) ECS secrets"
+echo "✅ Found $(wc -l < ecs_secrets.txt) ECS secrets"
 echo
 
 # 2. Grab all actual AWS Secrets Manager names defined in Terraform
-grep -Roh 'aws_secretsmanager_secret\.[^"]*' src/terraform/pulse/security/secrets-manager/ \
-  | sed -E 's/.*aws_secretsmanager_secret\.([^" ]*).*/\1/' \
-  | sort -u > /tmp/terraform_secrets.txt
+grep -Roh 'aws_secretsmanager_secret\.[a-zA-Z0-9_-]*' src/terraform/pulse/security/secrets-manager/ \
+  | sed -E 's/.*aws_secretsmanager_secret\.([a-zA-Z0-9_-]*).*/\1/' \
+  | sort -u > terraform_secrets.txt
 
-echo "✅ Found $(wc -l < /tmp/terraform_secrets.txt) Terraform secrets"
+echo "✅ Found $(wc -l < terraform_secrets.txt) Terraform secrets"
 echo
 
-# 3. Compare the two lists to see what ECS tasks reference vs what exists
+# 3. Compare the two lists
 echo "🔎 Checking which ECS secrets are defined in Terraform…"
-missing=$(comm -23 /tmp/ecs_secrets.txt /tmp/terraform_secrets.txt || true)
+missing=$(comm -23 ecs_secrets.txt terraform_secrets.txt || true)
 
 if [[ -n "$missing" ]]; then
-    echo "⚠️ The following ECS secrets were referenced but not found in Terraform definitions:"
+    echo "⚠️ The following ECS secrets were referenced in ECS tasks but not found in Terraform:"
     echo "$missing"
 else
     echo "✅ All ECS secrets have matching Terraform definitions"
 fi
 
 echo
-echo "📋 ECS secrets used (from task defs):"
-cat /tmp/ecs_secrets.txt
-
-
-
-Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
-$ ./script.sh
-🔍 Extracting secrets used in ECS task definitions…
-sed: -e expression #1, char 35: Invalid content of \{\}
-
+echo "📋 ECS secrets used (saved in ecs_secrets.txt):"
+cat ecs_secrets.txt
 
 echo
-echo "📋 Terraform secrets defined:"
-cat /tmp/terraform_secrets.txt
+echo "📋 Terraform secrets defined (saved in terraform_secrets.txt):"
+cat terraform_secrets.txt
