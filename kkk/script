@@ -1,3 +1,79 @@
+✅ We reviewed the ECS task execution role (src/terraform/pulse/security/iam/role_policies/pulse-cluster-task-execution-role-policy.json) and gathered the full list of required secrets from the ECS task definitions.
+
+Extracted secret list:
+
+secret_AwsAccessKey
+
+secret_AwsSecretKey
+
+secret_AwsRedisUrl
+
+secret_DefaultConnection
+
+secret_ReadonlyConnection
+
+secret_KeyStorePassword
+
+secret_RaygunApiKey
+
+secret_SerilogApiKey
+
+secret_SlackWebhook
+
+secret_email_username
+
+secret_email_password
+
+secret_PartnersApiKey
+
+secret_ScotMovesUsername
+
+secret_ScotMovesPassword
+
+secret_ScotMovesApiKey
+
+secret_SdkAwsAccessKey
+
+secret_SdkAwsSecretKey
+
+secret_SdkGeocoding
+
+secret_MessagingSdkAwsAccessKey
+
+secret_MessagingSdkAwsSecretKey
+
+secret_StorageSdkAwsAccessKey
+
+secret_StorageSdkAwsSecretKey
+
+secret_GeneticsConnection
+
+secret_UrusConnection
+
+secret_c2c_shared_secret
+
+Per discussion with Alex and Lars, this work will be deferred until after migrations. A new post-migration ticket will be created with Sheela to properly scope down the permissions using the above secret list.
+
+🔗 Follow-up will be tracked in [DEVOPS-####] (to be updated once Sheela creates the new ticket).
+
+Closing this ticket as the follow-up will be tracked separately.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Hi Sheela, following up on Alex’s note — we need to create a new post-migration ticket to address the ECS task execution role permission issues. I’ve already compiled the full list of required secrets, and I’ll include that in the new ticket. Can we work together to get this ticket created?
 
 
