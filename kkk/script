@@ -1,3 +1,5 @@
+Hi Alex — I’d like to open a group chat with you, Caleb, and Matias to review the ECS secrets list I compiled. Could you please share Matias’ email/contact so I can include him?  
+
 Hi all — I’ve created the PR for DEVOPS-3219.  
 I reviewed all ECS task definitions, extracted the secrets from `valueFrom`, mapped them to our Terraform-managed secrets, and updated the execution role policy to use explicit ARNs instead of a wildcard.  
 
