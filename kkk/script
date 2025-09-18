@@ -1,63 +1,39 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -euo pipefail
 
-# Step 1: Extract all secret_* keys from ECS container definitions
+echo "🔍 Extracting secrets used in ECS task definitions…"
+
+# 1. Grab all valueFrom secrets (e.g., ${secret_DefaultConnection})
 grep -Roh '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
-  | sed -E 's/.*\${(secret_[^}]*)}.*/\1/' \
+  | sed -E 's/.*\${secret_([^}]*)}.*/secret_\1/' \
   | sort -u > /tmp/ecs_secrets.txt
 
-echo "[INFO] Found $(wc -l < /tmp/ecs_secrets.txt) secrets used in ECS tasks"
+echo "✅ Found $(wc -l < /tmp/ecs_secrets.txt) ECS secrets"
+echo
 
-# Step 2: Look them up in secrets-manager tfvars
-rm -f /tmp/secrets_arns.txt
-for tfvars in src/terraform/pulse/security/secrets-manager/*.tfvars; do
-  echo "[INFO] Checking $tfvars"
-  while read -r secret; do
-    match=$(grep -E "^${secret}" "$tfvars" || true)
-    if [[ -n "$match" ]]; then
-      echo "$match"
-    fi
-  done < /tmp/ecs_secrets.txt
-done >> /tmp/secrets_arns.txt
+# 2. Grab all actual AWS Secrets Manager names defined in Terraform
+grep -Roh 'aws_secretsmanager_secret\.[^"]*' src/terraform/pulse/security/secrets-manager/ \
+  | sed -E 's/.*aws_secretsmanager_secret\.([^" ]*).*/\1/' \
+  | sort -u > /tmp/terraform_secrets.txt
 
-# Step 3: Look up KMS keys (search for kms_alias variables)
-rm -f /tmp/kms_arns.txt
-grep -R "kms_alias" src/terraform/pulse/security/secrets-manager/ || true > /tmp/kms_matches.txt
+echo "✅ Found $(wc -l < /tmp/terraform_secrets.txt) Terraform secrets"
+echo
 
-if [[ -s /tmp/kms_matches.txt ]]; then
-  echo "[INFO] Found KMS alias references:"
-  cat /tmp/kms_matches.txt
-  awk -F= '/kms_alias/ {gsub(/"/,"",$2); gsub(/ /,"",$2); print $2}' /tmp/kms_matches.txt > /tmp/kms_arns.txt
+# 3. Compare the two lists to see what ECS tasks reference vs what exists
+echo "🔎 Checking which ECS secrets are defined in Terraform…"
+missing=$(comm -23 /tmp/ecs_secrets.txt /tmp/terraform_secrets.txt || true)
+
+if [[ -n "$missing" ]]; then
+    echo "⚠️ The following ECS secrets were referenced but not found in Terraform definitions:"
+    echo "$missing"
+else
+    echo "✅ All ECS secrets have matching Terraform definitions"
 fi
 
-# Step 4: Convert to JSON Resource block
-{
-  echo '"Resource": ['
-  
-  # Secrets
-  awk -F= '{gsub(/"/, "", $2); gsub(/ /, "", $2); if($2!="") print "  \"" $2 "\","}' /tmp/secrets_arns.txt
-  
-  # KMS
-  if [[ -s /tmp/kms_arns.txt ]]; then
-    while read -r kms; do
-      echo "  \"arn:aws:kms:\${region}:\${account_id}:key/${kms}\","
-    done < /tmp/kms_arns.txt
-  fi
-
-} | awk 'NR==1{print;next} {line[NR]=$0} END{for(i=2;i<=NR;i++){if(i==NR){sub(/,$/,"",line[i])};print line[i]};print "]"}' > /tmp/policy_resources.json
-
-
-
-
-
-
-$ ./script.sh
-sed: -e expression #1, char 28: Invalid content of \{\}
-
-Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
-$
-
+echo
+echo "📋 ECS secrets used (from task defs):"
+cat /tmp/ecs_secrets.txt
 
 echo
-echo "[INFO] Final IAM policy Resource block:"
-cat /tmp/policy_resources.json
+echo "📋 Terraform secrets defined:"
+cat /tmp/terraform_secrets.txt
