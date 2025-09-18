@@ -46,6 +46,18 @@ fi
 
 } | awk 'NR==1{print;next} {line[NR]=$0} END{for(i=2;i<=NR;i++){if(i==NR){sub(/,$/,"",line[i])};print line[i]};print "]"}' > /tmp/policy_resources.json
 
+
+
+
+
+
+$ ./script.sh
+sed: -e expression #1, char 28: Invalid content of \{\}
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
+$
+
+
 echo
 echo "[INFO] Final IAM policy Resource block:"
 cat /tmp/policy_resources.json
