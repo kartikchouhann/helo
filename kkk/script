@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Step 1: Extract all secret_* keys from ECS container definitions
+grep -Roh '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
+  | sed -E 's/.*\${(secret_[^}]*)}.*/\1/' \
+  | sort -u > /tmp/ecs_secrets.txt
+
+echo "[INFO] Found $(wc -l < /tmp/ecs_secrets.txt) secrets used in ECS tasks"
+
+# Step 2: Look them up in secrets-manager tfvars
+rm -f /tmp/secrets_arns.txt
+for tfvars in src/terraform/pulse/security/secrets-manager/*.tfvars; do
+  echo "[INFO] Checking $tfvars"
+  while read -r secret; do
+    match=$(grep -E "^${secret}" "$tfvars" || true)
+    if [[ -n "$match" ]]; then
+      echo "$match"
+    fi
+  done < /tmp/ecs_secrets.txt
+done >> /tmp/secrets_arns.txt
+
+# Step 3: Look up KMS keys (search for kms_alias variables)
+rm -f /tmp/kms_arns.txt
+grep -R "kms_alias" src/terraform/pulse/security/secrets-manager/ || true > /tmp/kms_matches.txt
+
+if [[ -s /tmp/kms_matches.txt ]]; then
+  echo "[INFO] Found KMS alias references:"
+  cat /tmp/kms_matches.txt
+  awk -F= '/kms_alias/ {gsub(/"/,"",$2); gsub(/ /,"",$2); print $2}' /tmp/kms_matches.txt > /tmp/kms_arns.txt
+fi
+
+# Step 4: Convert to JSON Resource block
+{
+  echo '"Resource": ['
+  
+  # Secrets
+  awk -F= '{gsub(/"/, "", $2); gsub(/ /, "", $2); if($2!="") print "  \"" $2 "\","}' /tmp/secrets_arns.txt
+  
+  # KMS
+  if [[ -s /tmp/kms_arns.txt ]]; then
+    while read -r kms; do
+      echo "  \"arn:aws:kms:\${region}:\${account_id}:key/${kms}\","
+    done < /tmp/kms_arns.txt
+  fi
+
+} | awk 'NR==1{print;next} {line[NR]=$0} END{for(i=2;i<=NR;i++){if(i==NR){sub(/,$/,"",line[i])};print line[i]};print "]"}' > /tmp/policy_resources.json
+
+echo
+echo "[INFO] Final IAM policy Resource block:"
+cat /tmp/policy_resources.json
