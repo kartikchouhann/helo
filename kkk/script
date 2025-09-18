@@ -1,3 +1,8 @@
-grep -Rho '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
+$ grep -Rho '"valueFrom": *"\${secret_[^}]*}' src/terraform/pulse/compute/ecs/fargate/ \
   | sed -E 's/.*\${(secret_[^}]*)}.*/\1/' \
   | sort -u > ecs_secret_keys.txt
+sed: -e expression #1, char 28: Invalid content of \{\}
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3219-Over-permissive-secret-policy)
+$
