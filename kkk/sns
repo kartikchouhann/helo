@@ -1108,6 +1108,82 @@ resource "aws_iam_instance_profile" "this" {
 
 
 
+Carlos Rodríguez
+:palm_tree:  Aug 22nd at 10:38 PM
+Hi team, @Pete Dias @Alex Dees @Carine Wenyi @Bekhzod Akhrorov
+Can you please help me with an approval for this PR: https://github.com/vas-dev/vas-devops-pulse/pull/1361 is related to the missing SNS topic on staging, and the other changes are related to standardizing the sandbox environment (to make sure that we have the same configuration across all environments)
+Thanks!
+:white_check_mark:
+2
+
+11 replies
+
+
+Alex Dees
+  Aug 23rd at 12:06 AM
+not now, but i wonder if it is worth thinking about a way to avoid listing all these out multiple times (each env) when in most cases the diff is the endpoint url?
+image.png
+ 
+image.png
+
+
+12:08
+yaml?
+
+
+Carlos Rodríguez
+:palm_tree:  Aug 23rd at 12:08 AM
+I would say that it should be like that, but since I've checked everything that was in morpheus and then everything that it was on VAS accounts I noticed that there are topics in morpheus that does not exists in VAS for example
+
+
+Alex Dees
+  Aug 23rd at 12:09 AM
+yeah i'm just think the apps use a lot of sqs/sns for inter-messaging.  if the app needs it in staging, probably will need in prod too
+:white_check_mark:
+1
+
+
+
+Carlos Rodríguez
+:palm_tree:  Aug 23rd at 12:10 AM
+Like maybe we can make a common file for the inter messaging topics for apps (same for queues)
+
+
+Alex Dees
+  Aug 23rd at 12:11 AM
+that's where my mind was going
+
+
+Carlos Rodríguez
+:palm_tree:  Aug 23rd at 12:11 AM
+and we can have in the tfvars the notification channels, because for prod we will have a few topics for notifications that we won't have in staging for example
+
+
+Alex Dees
+  Aug 23rd at 12:11 AM
+yeah most will be same, but prob some diffs
+
+
+Carlos Rodríguez
+:palm_tree:  Aug 23rd at 12:12 AM
+I think it would be a good improvement
+
+
+Alex Dees
+  Aug 23rd at 12:13 AM
+ok let's put it on  the backlog for a rainy day
+:laughing:
+1
+
+
+
+Carlos Rodríguez
+:palm_tree:  Aug 23rd at 12:14 AM
+We had snow today here :snowflake:
+
+
+
+
 
 
 
