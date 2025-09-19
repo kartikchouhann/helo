@@ -1,1 +1,1113 @@
+managment.tfvars
+
+topic_policies = [
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Sid    = "default-statement-ID",
+          Effect = "Allow",
+          Principal = {
+            Service = ["lambda.amazonaws.com"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations",
+          Condition = {
+            ArnLike = {
+              "aws:SourceArn" = "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+        },
+        {
+          Sid    = "CrossAccountSubscribe",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-sls-deployment-role"]
+          },
+          Action   = ["SNS:Subscribe"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+        },
+        {
+          Sid    = "JRCrossAccountAccess",
+          Effect = "Allow",
+          Principal = {
+            AWS = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-platform-notifications"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Sid    = "default-statement-ID",
+          Effect = "Allow",
+          Principal = {
+            Service = ["lambda.amazonaws.com"]
+          },
+          Action   = ["SNS:Subscribe"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-notifications",
+          Condition = {
+            ArnLike = {
+              "aws:SourceArn" = "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-notifications"
+        },
+        {
+          Sid    = "JRCrossAccountAccess",
+          Effect = "Allow",
+          Principal = {
+            AWS = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-notifications"
+        },
+        {
+          Sid    = "SLSCrossAccountAccess",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/serverless-devops-role-prod"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-notifications"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairies"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Sid    = "default-statement-ID",
+          Effect = "Allow",
+          Principal = {
+            Service = ["lambda.amazonaws.com"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairies",
+          Condition = {
+            ArnLike = {
+              "aws:SourceArn" = "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairies"
+        },
+        {
+          "Sid"    = "CrossAccountJRStatement",
+          "Effect" = "Allow",
+          "Principal" = {
+            "AWS" = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          "Action"   = ["SNS:Publish"],
+          "Resource" = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairies"
+        },
+        {
+          "Sid"    = "CrossAccountCPStatement",
+          "Effect" = "Allow",
+          "Principal" = {
+            "AWS" = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-carepackages-instance-role"
+            ]
+          },
+          "Action"   = ["SNS:Subscribe"],
+          "Resource" = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairies"
+        },
+        {
+          Sid    = "CrossAccountSubscribe",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-sls-deployment-role"]
+          },
+          Action   = ["SNS:Subscribe"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairies"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-pulse-care-packages"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Sid    = "default-statement-ID",
+          Effect = "Allow",
+          Principal = {
+            Service = ["lambda.amazonaws.com"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-pulse-care-packages",
+          Condition = {
+            ArnLike = {
+              "aws:SourceArn" = "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-pulse-care-packages"
+        },
+        {
+          Sid    = "JRCrossAccountAccess",
+          Effect = "Allow",
+          Principal = {
+            AWS = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-carepackages-instance-role"
+            ]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-pulse-care-packages"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-platform-items"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-items",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-items"
+        },
+        {
+          Sid    = "JRCrossAccountAccess",
+          Effect = "Allow",
+          Principal = {
+            AWS = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-carepackages-instance-role"
+            ]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-items"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-zones"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Sid    = "default-statement-ID",
+          Effect = "Allow",
+          Principal = {
+            Service = ["lambda.amazonaws.com"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-ops-zones",
+          Condition = {
+            ArnLike = {
+              "aws:SourceArn" = "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-ops-zones"
+        },
+        {
+          Sid    = "JRCrossAccountAccess",
+          Effect = "Allow",
+          Principal = {
+            AWS = [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-ops-zones"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-herd-pens"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-pens",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountECSStatements",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-pens"
+        },
+        {
+          "Sid" : "JRCrossAccountAccess",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-pens"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-platform-feed"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Sid    = "__default_statement_ID",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["*"]
+          },
+          Action = [
+            "SNS:GetTopicAttributes",
+            "SNS:SetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:RemovePermission",
+            "SNS:DeleteTopic",
+            "SNS:Subscribe",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:Publish",
+            "SNS:Receive"
+          ],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-feed",
+          Condition = {
+            StringEquals = {
+              "AWS:SourceOwner" = "221515991534"
+            }
+          }
+        },
+        {
+          Sid    = "CrossAccountECSStatement",
+          Effect = "Allow",
+          Principal = {
+            AWS = ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          Action   = ["SNS:Publish"],
+          Resource = "arn:aws:sns:us-west-2:221515991534:vas-platform-feed"
+        },
+        {
+          "Sid" : "JRCrossAccountAccess",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-feed"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-vendor-integrations",
+    policy = {
+
+      "Version" : "2012-10-17",
+      "Id" : "vas-ops-vendor-integrations-topic",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-vendor-integrations",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountServerlessSubscribe",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/pulse-sls-deployment-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-vendor-integrations"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-parlors-milkings"
+    policy = {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          "Sid" : "lambda-publish-parlors",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors-milkings",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "sls-subscribe-pulse-prod",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/pulse-sls-deployment-role"]
+          },
+          "Action" : ["SNS:Subscribe"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors-milkings"
+        },
+        {
+          "Sid" : "sls-publish-pulse-prod",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/sls-lambda-aggregators-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors-milkings"
+        },
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-platform-kpis"
+    policy = {
+      Version = "2012-10-17",
+      Statement = [
+        {
+          "Sid" : "__default_statement_ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["*"]
+          },
+          "Action" : [
+            "SNS:GetTopicAttributes",
+            "SNS:SetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:RemovePermission",
+            "SNS:DeleteTopic",
+            "SNS:Subscribe",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:Publish",
+            "SNS:Receive"
+          ],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-kpis",
+          "Condition" : {
+            "StringEquals" : {
+              "AWS:SourceOwner" : "221515991534"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountECSStatement",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-kpis"
+        },
+        {
+          "Sid" : "JRCrossAccountAccess",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-kpis"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-companies"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "JobsrunnerCrossAccountAccess",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : [
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+              "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+            ]
+          },
+          "Action" : ["sns:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-companies"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-parlors"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountECSStatement",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::512438066734:role/pulse-cluster-task-execution-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-parlors-milk-parlors"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors-milk-parlors",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountECSStatement",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::512438066734:role/pulse-cluster-task-execution-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-parlors-milk-parlors"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-zone-integrations",
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-zone-integrations",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-dairy-vendor-integrations"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "__default_statement_ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-dairy-vendor-integrations",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "AllowPublishThroughSSLOnly",
+          "Effect" : "Deny",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-dairy-vendor-integrations",
+          "Condition" : {
+            "Bool" : {
+              "aws:SecureTransport" : "false"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-outgoing-integrations"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-outgoing-integrations",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-worklists"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-worklists",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-auth-users"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-auth-users",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-genetics-matings"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "__default_statement_ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["*"]
+          },
+          "Action" : [
+            "SNS:GetTopicAttributes",
+            "SNS:SetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:RemovePermission",
+            "SNS:DeleteTopic",
+            "SNS:Subscribe",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:Publish",
+            "SNS:Receive"
+          ],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-genetics-matings",
+          "Condition" : {
+            "StringEquals" : {
+              "AWS:SourceOwner" : "221515991534"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountECSStatement",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::512438066734:role/pulse-cluster-task-execution-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-genetics-matings"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-herd-daily-milkings"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "CrossAccountECSStatement",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : [
+              "arn:aws:iam::279137250720:role/pulse-herd-task-role",
+              "arn:aws:iam::279137250720:role/pulse-monolith-task-role"
+            ]
+          },
+          "Action" : ["sns:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-daily-milkings"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-herd-item-changes"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "publish-cross-account",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/integrations-attentions-lambdaRole-prod"]
+          },
+          "Action" : ["sns:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-item-changes"
+        },
+        {
+          "Sid" : "subscribe-cross-account",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::279137250720:role/pulse-sls-deployment-role"]
+          },
+          "Action" : ["sns:Subscribe"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-item-changes"
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-ops-addresses"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "__default_statement_ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-addresses",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "AllowPublishThroughSSLOnly",
+          "Effect" : "Deny",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-ops-addresses",
+          "Condition" : {
+            "Bool" : {
+              "aws:SecureTransport" : "false"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-platform-genetics"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "__default_statement_ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-genetics",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "AllowPublishThroughSSLOnly",
+          "Effect" : "Deny",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-platform-genetics",
+          "Condition" : {
+            "Bool" : {
+              "aws:SecureTransport" : "false"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:vas-herd-cowevents"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "__default_statement_ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-cowevents",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "AllowPublishThroughSSLOnly",
+          "Effect" : "Deny",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:vas-herd-cowevents",
+          "Condition" : {
+            "Bool" : {
+              "aws:SecureTransport" : "false"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    topic_arn = "arn:aws:sns:us-west-2:221515991534:integrations-parlors-dailymilkings"
+    policy = {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : "default-statement-ID",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : ["lambda.amazonaws.com"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:integrations-parlors-dailymilkings",
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:lambda:us-west-2:221515991534:*"
+            }
+          }
+        },
+        {
+          "Sid" : "CrossAccountECSStatement",
+          "Effect" : "Allow",
+          "Principal" : {
+            "AWS" : ["arn:aws:iam::512438066734:role/pulse-cluster-task-execution-role"]
+          },
+          "Action" : ["SNS:Publish"],
+          "Resource" : "arn:aws:sns:us-west-2:221515991534:integrations-parlors-dailymilkings"
+        }
+      ]
+    }
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+roles.tf
+
+# Create the roles
+resource "aws_iam_role" "role" {
+  for_each = { for role in var.roles : role.role_name => role }
+
+  name                  = each.key
+  description           = try(each.value.description, "Managed by terraform")
+  permissions_boundary  = try(each.value.permissions_boundary, null)
+  max_session_duration  = try(each.value.role_max_session_duration, 3600)
+  force_detach_policies = try(each.value.role_force_detach_policies, false)
+
+  # Add here only variables for assume policies.
+  assume_role_policy = templatefile(each.value.assume_policy, merge(each.value.policies_vars,
+    {
+      # Only define variables with defaults if missing from policies_vars.
+      region                = coalesce(each.value.policies_vars.region, data.aws_region.current.name)
+      account_id            = coalesce(each.value.policies_vars.account_id, data.aws_caller_identity.current.account_id)
+      management_account_id = data.aws_organizations_organization.current.master_account_id
+      principal_services    = jsonencode(coalesce(each.value.policies_vars.principal_services, []))
+      environment           = var.environment
+    })
+  )
+
+  tags = merge(
+    {
+      "Name" = "${each.key}-iam-role"
+    },
+    var.tags
+  )
+}
+
+# Attach a new created policy
+resource "aws_iam_role_policy" "this" {
+  for_each   = { for policies in local.role_policies : "${policies.role_name}-${policies.policy_key}" => policies }
+  depends_on = [aws_iam_role.role]
+
+  name = "${each.key}-iam-policy"
+  role = aws_iam_role.role[each.value.role_name].name
+
+  # Add here only variables for assume policies.
+  policy = templatefile(each.value.policy_path, merge(
+    each.value.policies_vars,
+    {
+      region       = coalesce(each.value.policies_vars.region, data.aws_region.current.name)
+      account_id   = coalesce(each.value.policies_vars.account_id, data.aws_caller_identity.current.account_id)
+      secrets_name = jsonencode(try(data.aws_secretsmanager_secrets.this[each.value.role_name].arns, null))
+      kms_alias    = try(data.aws_kms_alias.this[each.value.role_name].target_key_id, null)
+      efs_id       = try(data.aws_efs_file_system.this[each.value.role_name].id, null)
+      environment  = var.environment
+      #policy_services = jsonencode(coalesce(each.value.policies_vars.policy_services, []))
+
+      ses_identities = try(each.value.policies_vars.ses_identities, null) != null ? jsonencode([
+        for ses_name in each.value.policies_vars.ses_identities : "arn:aws:ses:${var.main_region}:${data.aws_caller_identity.current.account_id}:identity/${ses_name}"
+      ]) : "[]"
+
+      sns_topics_list = try(each.value.policies_vars.sns_topics_list, null) != null ? jsonencode([
+        for topic_name in each.value.policies_vars.sns_topics_list : "arn:aws:sns:*:${coalesce(each.value.policies_vars.sns_account_id, data.aws_caller_identity.current.account_id)}:${topic_name}"
+      ]) : "[]"
+
+      sns_publishers_list = try(each.value.policies_vars.sns_publishers_list, null) != null ? jsonencode([
+        for topic_name in each.value.policies_vars.sns_publishers_list : "arn:aws:sns:*:${coalesce(each.value.policies_vars.sns_account_id, data.aws_caller_identity.current.account_id)}:${topic_name}"
+      ]) : "[]"
+
+      sns_subscribers_list = try(each.value.policies_vars.sns_subscribers_list, null) != null ? jsonencode([
+        for topic_name in each.value.policies_vars.sns_subscribers_list : "arn:aws:sns:*:${coalesce(each.value.policies_vars.sns_account_id, data.aws_caller_identity.current.account_id)}:${topic_name}"
+      ]) : "[]"
+
+      sqs_queues_list = try(each.value.policies_vars.sqs_queues_list, null) != null ? jsonencode([
+        for queue_name in each.value.policies_vars.sqs_queues_list : "arn:aws:sqs:${var.main_region}:${coalesce(each.value.policies_vars.sqs_account_id, data.aws_caller_identity.current.account_id)}:${queue_name}"
+      ]) : "[]"
+
+      ecr_repo_list = try(each.value.policies_vars.ecr_repo_list, null) != null ? jsonencode([
+        for ecr_name in each.value.policies_vars.ecr_repo_list : "arn:aws:ecr:${var.main_region}:${data.aws_caller_identity.current.account_id}:repository/${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.main_region}.amazonaws.com/${ecr_name}"
+      ]) : "[]"
+
+      # These values are generated by pulse_buckets_names.
+      pulse_buckets_names_mix = try(each.value.policies_vars.pulse_buckets_names, null) != null ? jsonencode(flatten([
+        for bucket_name in each.value.policies_vars.pulse_buckets_names :
+        ["arn:aws:s3:::${bucket_name}-${var.main_region}-${var.environment}/*", "arn:aws:s3:::${bucket_name}-${var.main_region}-${var.environment}"]
+      ])) : "[]"
+
+      pulse_buckets_names_list = try(each.value.policies_vars.pulse_buckets_names, null) != null ? jsonencode(flatten([
+        for bucket_name in each.value.policies_vars.pulse_buckets_names : ["arn:aws:s3:::${bucket_name}-${var.main_region}-${var.environment}"]
+      ])) : "[]"
+
+      pulse_buckets_names_content = try(each.value.policies_vars.pulse_buckets_names, null) != null ? jsonencode(flatten([
+        for bucket_name in each.value.policies_vars.pulse_buckets_names : ["arn:aws:s3:::${bucket_name}-${var.main_region}-${var.environment}/*"]
+      ])) : "[]"
+
+      # These values are generated by bucket_names.
+      buckets_names_mix = try(each.value.policies_vars.buckets_names, null) != null ? jsonencode(flatten([
+        for bucket_name in each.value.policies_vars.buckets_names : ["arn:aws:s3:::${bucket_name}/*", "arn:aws:s3:::${bucket_name}"]
+      ])) : "[]"
+
+      buckets_names_list = try(each.value.policies_vars.buckets_names, null) != null ? jsonencode(flatten([
+        for bucket_name in each.value.policies_vars.buckets_names : ["arn:aws:s3:::${bucket_name}"]
+      ])) : "[]"
+
+      buckets_names_content = try(each.value.policies_vars.buckets_names, null) != null ? jsonencode(flatten([
+        for bucket_name in each.value.policies_vars.buckets_names : ["arn:aws:s3:::${bucket_name}/*"]
+      ])) : "[]"
+    })
+  )
+}
+
+# Attach an existent policy
+resource "aws_iam_role_policy_attachment" "this" {
+  for_each = { for policies in local.role_arns : "${policies.role_name}-${policies.arn_key}" => policies }
+
+  role       = aws_iam_role.role[each.value.role_name].name
+  policy_arn = each.value.policy_arn
+}
+
+resource "aws_iam_instance_profile" "this" {
+  for_each   = { for role in var.roles : role.role_name => role if role.instance_profile }
+  depends_on = [aws_iam_role.role]
+
+  name = aws_iam_role.role[each.value.role_name].name
+  role = aws_iam_role.role[each.value.role_name].name
+}
+
+
+
+
+
+
+
+
+
+
+
 
