@@ -1,3 +1,5 @@
+policy_path = "json/vas-platform-integrations.json"
+
 vas-platform-integrations.json
 {
   "Version": "2012-10-17",
