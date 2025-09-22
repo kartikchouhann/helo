@@ -1,3 +1,9 @@
+terraform -chdir="src/terraform/pulse/security/policies/messaging/sns" plan \
+  -var-file=management.tfvars \
+  -var="environment=sandbox" \
+  -target='aws_sns_topic_policy.this["arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"]'
+
+
 Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3414-Refactor-SNS)
 $ terraform -chdir="src/terraform/pulse/security/policies/messaging/sns" init --backend-config="${PWD}/src/terraform/pulse/env-sandbox/sandbox.conf"
 
