@@ -1,3 +1,38 @@
+variable "topic_policies" {
+  type = list(object({
+    topic_arn = string
+    policy = object({
+      Version = string
+      Statement = list(object({
+        Sid       = string
+        Effect    = string
+        Principal = map(list(string))
+        Action    = list(string)
+        Resource  = string
+        Condition = optional(map(map(string)), null)
+      }))
+    })
+  }))
+}
+
+variable "general_variables" {
+  description = "Custom project configs"
+  type = object({
+    main_region  = string
+    default_tags = map(string)
+  })
+}
+
+variable "pulse_project_configs" {
+  description = "Custom project configs"
+  type = object({
+    default_tags = map(string)
+  })
+}
+
+
+
+
 policy_path = "json/vas-platform-integrations.json"
 
 vas-platform-integrations.json
