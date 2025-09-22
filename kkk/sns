@@ -1,6 +1,14 @@
 variable "topic_policies" {
   type = list(object({
     topic_arn = string
+    policy    = string
+  }))
+}
+
+
+variable "topic_policies" {
+  type = list(object({
+    topic_arn = string
     policy = object({
       Version = string
       Statement = list(object({
