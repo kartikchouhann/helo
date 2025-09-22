@@ -1,0 +1,1008 @@
+   ├───env-security
+    │       global.tfvars
+    │       README.md
+    │       security.conf
+    │
+    ├───env-staging
+    │       global.tfvars
+    │       README.md
+    │       staging.conf
+    │
+    ├───eventbridge
+    │   │   config.tf
+    │   │   data.tf
+    │   │   main.tf
+    │   │   mangement.tfvars
+    │   │   prod.tfvars
+    │   │   sandbox.tfvars
+    │   │   security.tfvars
+    │   │   staging.tfvars
+    │   │   variables.tf
+    │   │
+    │   ├───.terragrunt
+    │   │       skip.env
+    │   │       terragrunt.hcl
+    │   │
+    │   ├───event_patterns
+    │   │       call_via_cloudtrail.json
+    │   │       cost-anomaly-detection.json
+    │   │       rds_instance_events.json
+    │   │       security-hub-notification.json
+    │   │
+    │   └───rules
+    │       └───http
+    │           │   config.tf
+    │           │   data.tf
+    │           │   main.tf
+    │           │   prod.tfvars
+    │           │   sandbox.tfvars
+    │           │   staging.tfvars
+    │           │   variables.tf
+    │           │
+    │           └───.terragrunt
+    │                   skip.env
+    │                   terragrunt.hcl
+    │
+    ├───messaging
+    │   ├───ses
+    │   │   │   config.tf
+    │   │   │   config_set.tf
+    │   │   │   data.tf
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   outputs.tf
+    │   │   │   prod.tfvars
+    │   │   │   sandbox.tfvars
+    │   │   │   ses.tf
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   └───sns-sqs
+    │       │   config.tf
+    │       │   data.tf
+    │       │   locals.tf
+    │       │   logs-prod.tfvars
+    │       │   logs.tfvars
+    │       │   management.tfvars
+    │       │   morpheus.tfvars
+    │       │   outputs.tf
+    │       │   prod.tfvars
+    │       │   README.local.md
+    │       │   README.md
+    │       │   sandbox.tfvars
+    │       │   security.tfvars
+    │       │   sns.tf
+    │       │   sqs.tf
+    │       │   staging.tfvars
+    │       │   variables.tf
+    │       │
+    │       ├───.terragrunt
+    │       │       skip.env
+    │       │       terragrunt.hcl
+    │       │
+    │       ├───custom_filters
+    │       │   └───sns
+    │       │       ├───management
+    │       │       │       vas-herd-cow-events-measure.json
+    │       │       │
+    │       │       ├───prod
+    │       │       │       integrations-parlors-dailymilkings.json
+    │       │       │       vas-auth-users.json
+    │       │       │       vas-genetics-matings-genetics-api.json
+    │       │       │       vas-genetics-matings.json
+    │       │       │       vas-herd-cow-events-measure.json
+    │       │       │       vas-herd-daily-milkings.json
+    │       │       │       vas-herd-item-changes.json
+    │       │       │       vas-herd-items-genetics.json
+    │       │       │       vas-herd-items-partner-integration.json
+    │       │       │       vas-herd-items-samples-management.json
+    │       │       │       vas-herd-pens.json
+    │       │       │       vas-ops-addresses.json
+    │       │       │       vas-ops-companies.json
+    │       │       │       vas-ops-dairies.json
+    │       │       │       vas-ops-dairy-vendor-integrations.json
+    │       │       │       vas-ops-outgoing-integrations.json
+    │       │       │       vas-ops-zone-integrations.json
+    │       │       │       vas-ops-zones.json
+    │       │       │       vas-parlors-milk-parlor.json
+    │       │       │       vas-parlors-milkings.json
+    │       │       │       vas-parlors.json
+    │       │       │       vas-platform-feed.json
+    │       │       │       vas-platform-genetics.json
+    │       │       │       vas-platform-integrations-email.json
+    │       │       │       vas-platform-integrations-genetics.json
+    │       │       │       vas-platform-integrations-sqs.json
+    │       │       │       vas-platform-integrations.json
+    │       │       │       vas-worklists.json
+    │       │       │
+    │       │       ├───sandbox
+    │       │       │       integrations-parlors-dailymilkings.json
+    │       │       │       vas-auth-users.json
+    │       │       │       vas-genetics-matings-genetics-api.json
+    │       │       │       vas-genetics-matings.json
+    │       │       │       vas-herd-cow-events-measure copy.json
+    │       │       │       vas-herd-cow-events-measure.json
+    │       │       │       vas-herd-daily-milkings.json
+    │       │       │       vas-herd-filter copy.json
+    │       │       │       vas-herd-filter.json
+    │       │       │       vas-herd-item-changes.json
+    │       │       │       vas-herd-items-genetics.json
+    │       │       │       vas-herd-items-partner-integration.json
+    │       │       │       vas-herd-items-samples-management.json
+    │       │       │       vas-herd-items.json
+    │       │       │       vas-herd-pens.json
+    │       │       │       vas-items-samples copy.json
+    │       │       │       vas-items-samples.json
+    │       │       │       vas-ops-addresses.json
+    │       │       │       vas-ops-companies.json
+    │       │       │       vas-ops-dairies.json
+    │       │       │       vas-ops-dairy-vendor-integrations.json
+    │       │       │       vas-ops-outgoing-integrations.json
+    │       │       │       vas-ops-zone-integrations.json
+    │       │       │       vas-ops-zones.json
+    │       │       │       vas-parlors-milk-parlor.json
+    │       │       │       vas-parlors-milkings.json
+    │       │       │       vas-parlors.json
+    │       │       │       vas-platform-feed.json
+    │       │       │       vas-platform-genetics.json
+    │       │       │       vas-platform-integrations-genetics.json
+    │       │       │       vas-platform-integrations-sqs.json
+    │       │       │       vas-platform-integrations.json
+    │       │       │       vas-pulse-care-packages.json
+    │       │       │       vas-worklists.json
+    │       │       │
+    │       │       └───staging
+    │       │               integrations-parlors-dailymilkings.json
+    │       │               vas-auth-users.json
+    │       │               vas-genetics-matings-genetics-api.json
+    │       │               vas-genetics-matings.json
+    │       │               vas-herd-cow-events-measure.json
+    │       │               vas-herd-daily-milkings.json
+    │       │               vas-herd-filter.json
+    │       │               vas-herd-item-changes.json
+    │       │               vas-herd-items-genetics.json
+    │       │               vas-herd-items-partner-integration.json
+    │       │               vas-herd-items-samples-management.json
+    │       │               vas-herd-items.json
+    │       │               vas-herd-pens.json
+    │       │               vas-items-samples.json
+    │       │               vas-ops-addresses.json
+    │       │               vas-ops-companies.json
+    │       │               vas-ops-dairies.json
+    │       │               vas-ops-dairy-vendor-integrations.json
+    │       │               vas-ops-outgoing-integrations.json
+    │       │               vas-ops-zone-integrations.json
+    │       │               vas-ops-zones.json
+    │       │               vas-parlors-milk-parlor.json
+    │       │               vas-parlors-milkings.json
+    │       │               vas-parlors.json
+    │       │               vas-platform-feed.json
+    │       │               vas-platform-genetics.json
+    │       │               vas-platform-integrations-genetics.json
+    │       │               vas-platform-integrations-sqs.json
+    │       │               vas-platform-integrations.json
+    │       │               vas-pulse-care-packages.json
+    │       │               vas-worklists.json
+    │       │
+    │       └───custom_policies
+    │           ├───sns
+    │           │       allow_cloudwatch_notification_sns.json
+    │           │       allow_cost_anomaly_alerts.json
+    │           │       allow_cross_account_publish_sns.json
+    │           │       allow_cross_account_publish_subscribe.json
+    │           │       allow_s3_bucket_notifications_sns.json
+    │           │       README.md
+    │           │
+    │           └───sqs
+    │                   allow_role.json
+    │                   allow_s3_bucket_notifications_sqs.json
+    │                   allow_sns_subscriptions_cross_account_sqs.json
+    │                   allow_sns_subscriptions_sqs.json
+    │                   README.md
+    │
+    ├───monitoring
+    │   ├───cloudwatch
+    │   │   ├───alarms
+    │   │   │   │   api-gateway.tf
+    │   │   │   │   billing.tf
+    │   │   │   │   config.tf
+    │   │   │   │   custom.tf
+    │   │   │   │   data.tf
+    │   │   │   │   ecs.tf
+    │   │   │   │   elasticache.tf
+    │   │   │   │   filters.tf
+    │   │   │   │   lambdas.tf
+    │   │   │   │   loadbalancer.tf
+    │   │   │   │   local.tf
+    │   │   │   │   logs-prod.tfvars
+    │   │   │   │   logs.tfvars
+    │   │   │   │   management.tfvars
+    │   │   │   │   outputs.tf
+    │   │   │   │   prod.tfvars
+    │   │   │   │   rds.tf
+    │   │   │   │   README.md
+    │   │   │   │   sandbox.tfvars
+    │   │   │   │   staging.tfvars
+    │   │   │   │   variables.tf
+    │   │   │   │
+    │   │   │   └───.terragrunt
+    │   │   │           skip.env
+    │   │   │           terragrunt.hcl
+    │   │   │
+    │   │   └───dashboards
+    │   │       │   config.tf
+    │   │       │   data.tf
+    │   │       │   logs-prod.tfvars
+    │   │       │   logs.tfvars
+    │   │       │   main.tf
+    │   │       │   prod.tfvars
+    │   │       │   sandbox.tfvars
+    │   │       │   staging.tfvars
+    │   │       │   variables.tf
+    │   │       │
+    │   │       ├───.terragrunt
+    │   │       │       skip.env
+    │   │       │       terragrunt.hcl
+    │   │       │
+    │   │       └───cloudwatch_dashboards
+    │   │               microservices_dashboard.json
+    │   │               partner_dashboard.json
+    │   │
+    │   ├───compute-optimizer
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   locals.tf
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   outputs.tf
+    │   │   │   prod.tfvars
+    │   │   │   sandbox.tfvars
+    │   │   │   security.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   └───route53
+    │       └───healthcheck
+    │           │   config.tf
+    │           │   main.tf
+    │           │   outputs.tf
+    │           │   prod.tfvars
+    │           │   sandbox.tfvars
+    │           │   staging.tfvars
+    │           │   variables.tf
+    │           │
+    │           └───.terragrunt
+    │                   skip.env
+    │                   terragrunt.hcl
+    │
+    ├───networking
+    │   ├───primary-vpc
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   data.tfvars
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   network.tfvars
+    │   │   │   outputs.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.cidr.md
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───pulse-alb
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   main.tf
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   sandbox.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───pulse-main-alb
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   dns.tf
+    │   │   │   locals.tf
+    │   │   │   main_alb.tf
+    │   │   │   main_nlb.tf
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   target_group_alb.tf
+    │   │   │   target_group_nlb.tf
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   ├───listeners
+    │   │   │   ├───alb
+    │   │   │   │       listeners.alb.prod.yaml
+    │   │   │   │       listeners.alb.sandbox.yaml
+    │   │   │   │       listeners.alb.staging.yaml
+    │   │   │   │
+    │   │   │   └───nlb
+    │   │   │           listeners.nlb.prod.yaml
+    │   │   │           listeners.nlb.sandbox.yaml
+    │   │   │           listeners.nlb.staging.yaml
+    │   │   │
+    │   │   ├───listeners-rules
+    │   │   │   └───alb
+    │   │   │           listeners-rules.alb.prod.yaml
+    │   │   │           listeners-rules.alb.sandbox.yaml
+    │   │   │           listeners-rules.alb.staging.yaml
+    │   │   │
+    │   │   └───target-groups
+    │   │       ├───alb
+    │   │       │       target.groups.alb.prod.yaml
+    │   │       │       target.groups.alb.sandbox.yaml
+    │   │       │       target.groups.alb.staging.yaml
+    │   │       │
+    │   │       └───nlb
+    │   │               target.groups.nlb.prod.yaml
+    │   │               target.groups.nlb.sandbox.yaml
+    │   │               target.groups.nlb.staging.yaml
+    │   │
+    │   ├───route53
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   locals.tf
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   management.tfvars
+    │   │   │   outputs.tf
+    │   │   │   private.tf
+    │   │   │   prod.tfvars
+    │   │   │   public.tf
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───external
+    │   │           checker.sh
+    │   │
+    │   └───subnets
+    │       │   config.tf
+    │       │   data.tf
+    │       │   locals.tf
+    │       │   management.tfvars
+    │       │   nacl.tf
+    │       │   outputs.tf
+    │       │   README.md
+    │       │   routes.tf
+    │       │   sandbox.tfvars
+    │       │   subnets.tf
+    │       │   variables.tf
+    │       │
+    │       └───.terragrunt
+    │               skip.env
+    │               terragrunt.hcl
+    │
+    ├───organizations
+    │   ├───backup-policies
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   locals.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   README.md
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───policies
+    │   │           general-template.json
+    │   │
+    │   ├───config
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   README.md
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───conformance-packs
+    │   │       │   config.tf
+    │   │       │   main.tf
+    │   │       │   management.tfvars
+    │   │       │   README.md
+    │   │       │   variables.tf
+    │   │       │
+    │   │       └───template
+    │   │               ConformancePack-1.yml
+    │   │               ConformancePack-2.yml
+    │   │               ConformancePack-3.yml
+    │   │               ConformancePack-4.yml
+    │   │               ConformancePack-5.yml
+    │   │               ConformancePack-6.yml
+    │   │
+    │   ├───delegated-admin-accounts
+    │   │   │   config.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   output.tf
+    │   │   │   README.md
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───organization
+    │   │   │   config.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   README.md
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───organization-policy
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   locals.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   README.local.md
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───policies
+    │   │       ├───scp
+    │   │       │       deny_access_iam_role_exception.json
+    │   │       │       deny_account_leaving_organization.json
+    │   │       │       deny_actions_outside_region.json
+    │   │       │       deny_actions_without_tag.json
+    │   │       │       deny_all_actions.json
+    │   │       │       deny_changes_budget.json
+    │   │       │       deny_changes_cloudwatch_logs.json
+    │   │       │       deny_changes_cloudwatch_monitors.json
+    │   │       │       deny_changes_config.json
+    │   │       │       deny_changes_guard_duty.json
+    │   │       │       deny_root_actions.json
+    │   │       │       deny_secret_rud.json
+    │   │       │       deny_ssh_key_creation.json
+    │   │       │       limit_changes_cost_anomaly.json
+    │   │       │       README.md
+    │   │       │       sandbox_ou_policy.json
+    │   │       │       staging_ou_policy.json
+    │   │       │
+    │   │       └───tag
+    │   │               README.md
+    │   │               validation.json
+    │   │
+    │   ├───organization-units
+    │   │   │   config.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   outputs.tf
+    │   │   │   README.md
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   └───resource-access-manager
+    │       │   config.tf
+    │       │   main.tf
+    │       │   management.tfvars
+    │       │   outputs.tf
+    │       │   README.md
+    │       │   variables.tf
+    │       │
+    │       └───.terragrunt
+    │               skip.env
+    │               terragrunt.hcl
+    │
+    ├───security
+    │   ├───certificate-manager
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   locals.tf
+    │   │   │   main.tf
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───iam
+    │   │   │   backup.tfvars
+    │   │   │   config.tf
+    │   │   │   data-prod.tfvars
+    │   │   │   data-staging.tfvars
+    │   │   │   data.tfvars
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   morpheus.tfvars
+    │   │   │   network-prod.tfvars
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   security.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   ├───group_policies
+    │   │   │   │   allow-ssm-view.json
+    │   │   │   │   cloudformation-s3-list-access.json
+    │   │   │   │   cloudwatch-events-access.json
+    │   │   │   │   cloudwatch-logs-access.json
+    │   │   │   │   cloudwatch-logs-read-only.json
+    │   │   │   │   domain-manager-access.json
+    │   │   │   │   ecs-access-read-only.json
+    │   │   │   │   iam-assume-role-access.json
+    │   │   │   │   iam-create-role-integrations-access.json
+    │   │   │   │   lambda-access.json
+    │   │   │   │   nonsensitive-ec2-ssm-access.json
+    │   │   │   │   s3-bucket-read-only-access.json
+    │   │   │   │   s3-bucket-teams-access.json
+    │   │   │   │   sensitive-ec2-ssm-access.json
+    │   │   │   │
+    │   │   │   └───tagged_policies
+    │   │   │           api-gateway-access.json
+    │   │   │           cloudformation-access.json
+    │   │   │           iam-automation-access.json
+    │   │   │           s3-sls-deployment-bucket.json
+    │   │   │           secrets-manager-read-only.json
+    │   │   │           sns-access.json
+    │   │   │
+    │   │   ├───role_policies
+    │   │   │   │   allow-cloudwatch-log.json
+    │   │   │   │   allow-config-publish-sns.json
+    │   │   │   │   allow-kms-decrypt.json
+    │   │   │   │   allow-kms-sns-decrypt.json
+    │   │   │   │   allow-sns-publish.json
+    │   │   │   │   assume-role-databricks-storage-credentials-policy.json
+    │   │   │   │   break-glass-region.json
+    │   │   │   │   data-developer-console-ro.json
+    │   │   │   │   data-developer-console.json
+    │   │   │   │   databricks-file-notification-mode.json
+    │   │   │   │   datascience-dms-full-access.json
+    │   │   │   │   datascience-s3-ro.json
+    │   │   │   │   datasync-s3-cross-account-policy.json
+    │   │   │   │   developer-logs-policy.json
+    │   │   │   │   dms-s3-access.json
+    │   │   │   │   dms-secret-access.json
+    │   │   │   │   ec2-instance-role-bucket-access.json
+    │   │   │   │   ec2-instance-role-databricks-bucket-access.json
+    │   │   │   │   ec2-instance-role-emr-bucket-access.json
+    │   │   │   │   ec2-instance-role-get-secrets.json
+    │   │   │   │   ecs-events-policy.json
+    │   │   │   │   efs-elastic-beanstalk-access.json
+    │   │   │   │   elastic-beanstalk-carepackages-instance-role-policy.json
+    │   │   │   │   elastic-beanstalk-instance-role-bucket-access.json
+    │   │   │   │   elastic-beanstalk-instance-role-policy.json
+    │   │   │   │   elastic-beanstalk-jobsrunner-instance-role-policy.json
+    │   │   │   │   eventbridge-endpoint-policy.json
+    │   │   │   │   feedwatch-support.json
+    │   │   │   │   general-s3-bucket-replication.json
+    │   │   │   │   integration-s3-antivirus-instance-role-policy.json
+    │   │   │   │   jobsrunner-codebuild-role-policy.json
+    │   │   │   │   jobsrunner-codepipeline-role-policy.json
+    │   │   │   │   parlorboss-s3-upload.json
+    │   │   │   │   pulse-cluster-task-execution-role-policy.json
+    │   │   │   │   pulse-cluster-task-role-policy.json
+    │   │   │   │   pulse-databricks-role-policy.json
+    │   │   │   │   pulse-emr-data-lake-service-role-policy.json
+    │   │   │   │   pulse-glue-data-lake-role-policy.json
+    │   │   │   │   rds-sql-server-backup-restore.json
+    │   │   │   │   s3-access-rw.json
+    │   │   │   │   sls-developer-api-execution-role-policy.json
+    │   │   │   │   sls-developer-console.json
+    │   │   │   │   sls-developer-deployment.json
+    │   │   │   │   sls-lambda-aggregators.json
+    │   │   │   │   sql-migrations-cicd.json
+    │   │   │   │
+    │   │   │   └───ms-roles
+    │   │   │           pulse-alerts-task-role-policy.json
+    │   │   │           pulse-auth-task-role-policy.json
+    │   │   │           pulse-feed-task-role-policy.json
+    │   │   │           pulse-feednext-rc-task-role-policy.json
+    │   │   │           pulse-feednext-task-role-policy.json
+    │   │   │           pulse-generic-task-role-policy.json
+    │   │   │           pulse-genetics-task-role-policy.json
+    │   │   │           pulse-herd-task-role-policy.json
+    │   │   │           pulse-monolith-task-role-policy.json
+    │   │   │           pulse-op-sync-task-role-policy.json
+    │   │   │           pulse-ops-task-role-policy.json
+    │   │   │           pulse-parlors-task-role-policy.json
+    │   │   │
+    │   │   └───role_policies_assume
+    │   │           assume-account.json
+    │   │           assume-audit.json
+    │   │           assume-break-glass-policy.json
+    │   │           assume-controltower.json
+    │   │           assume-federated-github-identity.json
+    │   │           assume-services-EXTERNAL-databricks.json
+    │   │           assume-services-EXTERNAL-storage-databricks.json
+    │   │           assume-services.json
+    │   │           assume-web-identity.json
+    │   │
+    │   ├───identity-center
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   locals.tf
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   output.tf
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───inline_policies
+    │   │           cloudwatch-logs-policy.json
+    │   │           readonly-devops-policy.json
+    │   │           readonly-engineering-leads-policy.json
+    │   │
+    │   ├───kms
+    │   │   │   backup.conf
+    │   │   │   backup.tfvars
+    │   │   │   config.tf
+    │   │   │   data-prod.conf
+    │   │   │   data-prod.tfvars
+    │   │   │   data-staging.conf
+    │   │   │   data-staging.tfvars
+    │   │   │   data.conf
+    │   │   │   data.tf
+    │   │   │   data.tfvars
+    │   │   │   logs-prod.conf
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.conf
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.conf
+    │   │   │   management.tfvars
+    │   │   │   morpheus.conf
+    │   │   │   morpheus.tfvars
+    │   │   │   network-prod.conf
+    │   │   │   network-prod.tfvars
+    │   │   │   network.conf
+    │   │   │   network.tfvars
+    │   │   │   outputs.tf
+    │   │   │   prod.conf
+    │   │   │   prod.tfvars
+    │   │   │   README.md
+    │   │   │   sandbox.conf
+    │   │   │   sandbox.tfvars
+    │   │   │   security.conf
+    │   │   │   security.tfvars
+    │   │   │   staging.conf
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───custom_policies
+    │   │           kms_code_pipeline.json
+    │   │           kms_custom_flow_logs.json
+    │   │           kms_custom_rds.json
+    │   │           kms_cw_log_group.json
+    │   │           kms_dnssec.json
+    │   │           kms_dnssec_cw_log_group.json
+    │   │           kms_dns_resolver_cw_log_group.json
+    │   │           kms_dynamo.json
+    │   │           kms_ecr.json
+    │   │           kms_general_cloudtrail.json
+    │   │           kms_general_cloudwatch.json
+    │   │           kms_general_sns.json
+    │   │           kms_general_sns_cross_account.json
+    │   │           kms_rds_secret.json
+    │   │           kms_redis.json
+    │   │           kms_secret_manager.json
+    │   │           kms_ssm_param_store.json
+    │   │           README.md
+    │   │
+    │   ├───password-policy
+    │   │   │   config.tf
+    │   │   │   main.tf
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───policies
+    │   │   ├───messaging
+    │   │   │   ├───sns
+    │   │   │   │   │   .terraform.lock.hcl
+    │   │   │   │   │   config.tf
+    │   │   │   │   │   main.tf
+    │   │   │   │   │   management.tfvars
+    │   │   │   │   │   morpheus.tfvars
+    │   │   │   │   │   variables.tf
+    │   │   │   │   │
+    │   │   │   │   ├───.terraform
+    │   │   │   │   │   │   terraform.tfstate
+    │   │   │   │   │   │
+    │   │   │   │   │   └───providers
+    │   │   │   │   │       └───registry.terraform.io
+    │   │   │   │   │           └───hashicorp
+    │   │   │   │   │               └───aws
+    │   │   │   │   │                   └───4.67.0
+    │   │   │   │   │                       └───windows_amd64
+    │   │   │   │   │                               terraform-provider-aws_v4.67.0_x5.exe
+    │   │   │   │   │
+    │   │   │   │   └───json
+    │   │   │   │           vas-platform-integrations.json
+    │   │   │   │
+    │   │   │   └───sqs
+    │   │   │           config.tf
+    │   │   │           main.tf
+    │   │   │           morpheus.tfvars
+    │   │   │           variables.tf
+    │   │   │
+    │   │   └───storage
+    │   │       └───s3
+    │   │               config.tf
+    │   │               data-prod.tfvars
+    │   │               data-staging.tfvars
+    │   │               main.tf
+    │   │               management.tfvars
+    │   │               morpheus.tfvars
+    │   │               variables.tf
+    │   │
+    │   ├───secrets-manager
+    │   │   │   config.tf
+    │   │   │   data-prod.tfvars
+    │   │   │   data-staging.tfvars
+    │   │   │   data.tf
+    │   │   │   data.tfvars
+    │   │   │   locals.tf
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   morpheus.tfvars
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   security.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variable.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───security-groups
+    │   │   │   config.tf
+    │   │   │   data.tf
+    │   │   │   data.tfvars
+    │   │   │   locals.tf
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   security.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   ├───security-hub
+    │   │   │   config.tf
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   prod.tfvars
+    │   │   │   sandbox.tfvars
+    │   │   │   security.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   └───.terragrunt
+    │   │           skip.env
+    │   │           terragrunt.hcl
+    │   │
+    │   └───waf
+    │       │   cloudwatch.tf
+    │       │   config.tf
+    │       │   data.tf
+    │       │   main.tf
+    │       │   output.tf
+    │       │   prod.tfvars
+    │       │   README.md
+    │       │   sandbox.tfvars
+    │       │   staging.tfvars
+    │       │   variables.tf
+    │       │
+    │       └───.terragrunt
+    │               skip.env
+    │               terragrunt.hcl
+    │
+    ├───storage
+    │   │   README.md
+    │   │
+    │   ├───efs
+    │   │       config.tf
+    │   │       data.tf
+    │   │       locals.tf
+    │   │       main.tf
+    │   │       prod.tfvars
+    │   │       sandbox.tfvars
+    │   │       staging.tfvars
+    │   │       variables.tf
+    │   │
+    │   ├───s3
+    │   │   │   backup.tfvars
+    │   │   │   config.tf
+    │   │   │   data-prod.tfvars
+    │   │   │   data-staging.tfvars
+    │   │   │   data.tf
+    │   │   │   data.tfvars
+    │   │   │   logs-prod.tfvars
+    │   │   │   logs.tfvars
+    │   │   │   main.tf
+    │   │   │   management.tfvars
+    │   │   │   output.tf
+    │   │   │   prod.tfvars
+    │   │   │   README.local.md
+    │   │   │   README.md
+    │   │   │   sandbox.tfvars
+    │   │   │   security.tfvars
+    │   │   │   staging.tfvars
+    │   │   │   variables.tf
+    │   │   │
+    │   │   ├───.terragrunt
+    │   │   │       skip.env
+    │   │   │       terragrunt.hcl
+    │   │   │
+    │   │   └───custom_policies
+    │   │           alb_access_logs_bucket.json
+    │   │           allow-crossaccount-replication-datasync-policy.json
+    │   │           allow_cloudfront_access_policy.json
+    │   │           api-files-policy.json
+    │   │           api-files-public-policy.json
+    │   │           aws-config-logs.json
+    │   │           cloudfront_logs_bucket.json
+    │   │           cloud_trail_bucket.json
+    │   │           code_pipeline_bucket.json
+    │   │           default_deny.json
+    │   │           default_deny_delete_objects.json
+    │   │           dms_cross_account_databricks.prod.json
+    │   │           dms_cross_account_databricks.sandbox.json
+    │   │           dms_cross_account_databricks.staging.json
+    │   │           ec2_databricks.json
+    │   │           morpheus_api_files.json
+    │   │           morpheus_api_files_public.json
+    │   │           README.md
+    │   │           replication-destination-bucket-policy.json
+    │   │           vas-api-files-quarantine-policy.json
+    │   │
+    │   ├───s3-replication
+    │   │       config.tf
+    │   │       data.tf
+    │   │       main.tf
+    │   │       management.tfvars
+    │   │       morpheus.tfvars
+    │   │       sandbox.tfvars
+    │   │       staging.tfvars
+    │   │       variables.tf
+    │   │
+    │   └───static-website
+    │       │   config.tf
+    │       │   data.tf
+    │       │   main.tf
+    │       │   output.tf
+    │       │   prod.tfvars
+    │       │   sandbox.tfvars
+    │       │   staging.tfvars
+    │       │   variables.tf
+    │       │
+    │       └───.terragrunt
+    │               skip.env
+    │               terragrunt.hcl
+    │
+    └───systems-manager
+        ├───image-builder
+        │   │   config.tf
+        │   │   data.tf
+        │   │   iam.tf
+        │   │   local.tf
+        │   │   main.tf
+        │   │   sandbox.tfvars
+        │   │   security.tfvars
+        │   │   staging.tfvars
+        │   │   variable.tf
+        │   │
+        │   ├───.terragrunt
+        │   │       skip.env
+        │   │       terragrunt.hcl
+        │   │
+        │   └───templates
+        │           eset-build.yml
+        │           ninja-rmm-build.yml
+        │           ninja-rmm-test.yml
+        │           sentinelone-build.yml
+        │           sentinelone-test.yml
+        │
+        └───parameter-store
+            │   config.tf
+            │   data-prod.tfvars
+            │   data-staging.tfvars
+            │   data.tf
+            │   data.tfvars
+            │   main.tf
+            │   output.tf
+            │   README.md
+            │   sandbox.tfvars
+            │   security.tfvars
+            │   staging.tfvars
+            │   variable.tf
+            │
+            └───.terragrunt
+                    skip.env
+                    terragrunt.hcl
