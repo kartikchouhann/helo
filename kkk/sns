@@ -1,3 +1,44 @@
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\policies\messaging\sns> tree /f
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 8AD3-73D0
+C:.
+│   config.tf
+│   main.tf
+│   management.tfvars
+│   morpheus.tfvars
+│   variables.tf
+│   
+└───json
+        vas-platform-integrations.json
+
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\policies\messaging\sns>
+
+
+
+main.tf
+resource "aws_sns_topic_policy" "this" {
+  for_each = { for policy in var.topic_policies : policy.topic_arn => policy }
+  arn      = each.key
+  policy = jsonencode({
+    Version = each.value.policy.Version
+    Statement = [
+      for statement in each.value.policy.Statement : merge({
+        Sid       = statement.Sid
+        Effect    = statement.Effect
+        Principal = statement.Principal
+        Action    = statement.Action
+        Resource  = statement.Resource
+        },
+        statement.Condition != null ? {
+          Condition = statement.Condition
+      } : {})
+    ]
+  })
+}
+
+
+
+
 variable "topic_policies" {
   type = list(object({
     topic_arn = string
