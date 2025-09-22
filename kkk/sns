@@ -1,3 +1,56 @@
+vas-platform-integrations.json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "default-statement-ID",
+      "Effect": "Allow",
+      "Principal": { "Service": ["lambda.amazonaws.com"] },
+      "Action": ["SNS:Publish"],
+      "Resource": "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations",
+      "Condition": {
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:lambda:us-west-2:221515991534:*"
+        }
+      }
+    },
+    {
+      "Sid": "CrossAccountECSStatement",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["arn:aws:iam::279137250720:role/pulse-cluster-task-execution-role"]
+      },
+      "Action": ["SNS:Publish"],
+      "Resource": "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+    },
+    {
+      "Sid": "CrossAccountSubscribe",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["arn:aws:iam::279137250720:role/pulse-sls-deployment-role"]
+      },
+      "Action": ["SNS:Subscribe"],
+      "Resource": "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+    },
+    {
+      "Sid": "JRCrossAccountAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-instance-role",
+          "arn:aws:iam::279137250720:role/pulse-elastic-beanstalk-jobsrunner-instance-role"
+        ]
+      },
+      "Action": ["SNS:Publish"],
+      "Resource": "arn:aws:sns:us-west-2:221515991534:vas-platform-integrations"
+    }
+  ]
+}
+
+
+
+
+
 managment.tfvars
 
 topic_policies = [
