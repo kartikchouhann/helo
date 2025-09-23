@@ -1,3 +1,34 @@
+# List rules that have ECS targets
+for r in $(aws events list-rules --region us-west-2 --query 'Rules[].Name' --output text); do
+  if aws events list-targets-by-rule --region us-west-2 --rule "$r" \
+       --query 'Targets[?EcsParameters!=null]' --output text | grep -qi .; then
+    echo "== $r ==";
+    aws events list-targets-by-rule --region us-west-2 --rule "$r" --output json \
+      | grep -Eio '"taskDefinitionArn"[^"]*"[^"]+' | sed 's/.*"//'
+  fi
+done
+
+# Quick genetics sweeps
+aws events list-rules --region us-west-2 --output json | grep -i genetics || true
+aws scheduler list-schedules --region us-west-2 --query 'Schedules[].Name' --output text \
+  | tr '\t' '\n' | grep -i genetics || true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Good Morning @Carlos Rodríguez
 I am working on DevOps Sprint 66 - DevOps Scrum Board - Scrum Board - VAS JIRA and made the code changes to remove the databases-storage-alert-rule from sandbox. To validate, I ran terraform apply locally (with auto-approval disabled).
 The plan correctly showed the databases-storage-alert-rule and its target scheduled for destroy, but it also flagged two additional rules (dms-task-failure-rule and elasticbeanstalk-notification-rule) for removal, plus one SNS target addition. I cancelled the apply at the prompt so no changes were made.
