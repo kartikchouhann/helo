@@ -1,4 +1,12 @@
 
+aws events list-rules --region us-west-2 | grep genetics
+aws events list-targets-by-rule --rule <RULE_NAME> --region us-west-2
+or if using the new Scheduler:
+
+bash
+Copy code
+aws scheduler list-schedules --region us-west-2 | grep genetics
+
 Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
 $ grep -R "aws_cloudwatch_event_rule" src/terraform/pulse/
 
