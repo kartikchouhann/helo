@@ -1,4 +1,21 @@
 Background
+
+DEVOPS-3503 – cleanup of EventBridge rules.
+The databases-storage-alert-rule was configured to capture RDS instance events and send them to the vas-devops-events SNS topic. After review, this rule is no longer needed in the sandbox environment, so it has been removed from Terraform code.
+
+Changes
+
+Deleted the full block for databases-storage-alert-rule from sandbox.tfvars under eventbridge/.
+
+Left all other environments untouched (staging, prod, management, security).
+
+No other EventBridge rules or SNS targets were modified.
+
+Confirmed the SNS topic vas-devops-events remains in place since it is still used by multiple other rules.
+
+
+
+Background
 DEVOPS-3503
 
 As part of DEVOPS-3503, we are decommissioning the EventBridge rule databases-storage-alert-rule.
