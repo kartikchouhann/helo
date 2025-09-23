@@ -1,3 +1,161 @@
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R "databases-storage-alert-rule" src/terraform/pulse/
+src/terraform/pulse/eventbridge/mangement.tfvars:        name               = "databases-storage-alert-rule"
+src/terraform/pulse/eventbridge/prod.tfvars:        name               = "databases-storage-alert-rule"
+src/terraform/pulse/eventbridge/sandbox.tfvars:        name               = "databases-storage-alert-rule"
+src/terraform/pulse/eventbridge/staging.tfvars:        name               = "databases-storage-alert-rule"
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R "vas-devops-events" src/terraform/pulse/
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:        targets            = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/mangement.tfvars:            name = "vas-devops-events"
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:        targets            = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/prod.tfvars:            name = "vas-devops-events"
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:        targets            = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/sandbox.tfvars:            name = "vas-devops-events"
+src/terraform/pulse/eventbridge/security.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/security.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:        targets            = [{ type = "sns", name = "vas-devops-events" }]
+src/terraform/pulse/eventbridge/staging.tfvars:            name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/logs-prod.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/logs-prod.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/logs.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/logs.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/management.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/management.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/prod.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/prod.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/sandbox.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/sandbox.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/security.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/security.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/staging.tfvars:        topic_name = "vas-devops-events"
+src/terraform/pulse/messaging/sns-sqs/staging.tfvars:        topic_name = "vas-devops-events"
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$
+
+
 grep -R "databases-storage-alert-rule" src/terraform/pulse/
 and also:
 
