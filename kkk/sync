@@ -1,3 +1,10 @@
+grep -R "databases-storage-alert-rule" src/terraform/pulse/
+and also:
+
+bash
+Copy code
+grep -R "vas-devops-events" src/terraform/pulse/
+
 Salma Sheref@SalmaSheref MINGW64 ~
 $ aws events list-targets-by-rule --rule databases-storage-alert-rule  --region us-west-2
 {
