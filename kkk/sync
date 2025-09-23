@@ -1,3 +1,14 @@
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws events list-rules --region us-west-2 | grep genetics
+            "EventPattern": "{\"detail\":{\"EventID\":[\"RDS-EVENT-0089\",\"RDS-EVENT-0007\",\"RDS-EVENT-0227\",\"RDS-EVENT-0222\"],\"SourceArn\":[\"arn:aws:rds:us-west-2:792827266856:db:crud-users-db\",\"arn:aws:rds:us-west-2:792827266856:db:agsource-alta-gps\",\"arn:aws:rds:us-west-2:792827266856:cluster:datascience-platform-aurora-cluster\",\"arn:aws:rds:us-west-2:792827266856:cluster:platform-prod-aurora\",\"arn:aws:rds:us-west-2:792827266856:db:vas-db-genetics\"]},\"detail-type\":[\"RDS DB Instance Event\"],\"source\":[\"aws.rds\"]}",
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws scheduler list-schedules --region us-west-2 | grep genetics
+
+Salma 
+
+
+
 
 aws events list-rules --region us-west-2 | grep genetics
 aws events list-targets-by-rule --rule <RULE_NAME> --region us-west-2
