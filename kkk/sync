@@ -1,3 +1,18 @@
+# look for eventbridge resources
+grep -R "aws_cloudwatch_event_rule" src/terraform/pulse/
+
+# look for event targets (likely ecs:RunTask)
+grep -R "aws_cloudwatch_event_target" src/terraform/pulse/
+
+# look for scheduler (newer replacement for EB rule)
+grep -R "aws_scheduler_schedule" src/terraform/pulse/
+
+# look for run-task actions
+grep -R "RunTask" src/terraform/pulse/
+
+
+
+
 Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
 $ grep -R  genetics_sync* src/terraform/pulse/
 src/terraform/pulse/compute/ecs/fargate/genetics-sync-microservice/main.tf:        secret_GeneticsConnection = data.terraform_remote_state.secrets.outputs.secrets_arns["rds_mysql_genetics_sync_connection_url_secret"]
