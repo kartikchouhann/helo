@@ -1,3 +1,394 @@
+C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\eventbridge\staging.tfvars
+eventbridge = {
+  virginia = {
+    rules = [
+      {
+        name = "acm-certificate-deletion-rule"
+        event_pattern_vars = {
+          source = "acm"
+          events = ["DeleteCertificate"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "iam-rule"
+        event_pattern_vars = {
+          source = "iam"
+          events = [
+            "CreateAccessKey",
+            "CreateUser",
+            "DeleteAccessKey",
+            "DeleteGroup",
+            "DeleteUser",
+            "RemoveUserFromGroup"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "organizations-rule"
+        event_pattern_vars = {
+          source = "organizations"
+          events = [
+            "CreateAccount",
+            "CreateOrganization",
+            "CreateOrganizationalUnit",
+            "CreatePolicy",
+            "DeleteOrganization",
+            "DeleteOrganizationalUnit",
+            "DeletePolicy",
+            "DetachPolicy",
+            "DisableAWSServiceAccess",
+            "InviteAccountToOrganization",
+            "LeaveOrganization",
+            "MoveAccount",
+            "RemoveAccountFromOrganization",
+            "UpdateOrganizationalUnit",
+            "UpdatePolicy"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "route53-rule"
+        event_pattern_vars = {
+          source = "route53"
+          events = [
+            "ChangeResourceRecordSets",
+            "CreateHealthCheck",
+            "CreateHostedZone",
+            "DeleteHealthCheck",
+            "DeleteHostedZone"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "s3-rule"
+        event_pattern_vars = {
+          source = "s3"
+          events = [
+            "DeleteBucket",
+            "DeleteBucketEncryption",
+            "DeleteBucketPolicy",
+            "PutBucketPolicy"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "securityhub-rule"
+        event_pattern_vars = {
+          source = "securityhub"
+          events = ["DisableSecurityHub"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      }
+    ]
+  }
+
+  oregon = {
+    rules = [
+      {
+        name = "acm-certificate-deletion-rule"
+        event_pattern_vars = {
+          source = "acm"
+          events = ["DeleteCertificate"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "apigateway-rule"
+        event_pattern_vars = {
+          source = "apigateway"
+          events = [
+            "DeleteApiKey",
+            "DeleteAuthorizer",
+            "DeleteClientCertificate",
+            "DeleteUsagePlan",
+            "UpdateUsagePlan"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "autoscaling-rule"
+        event_pattern_vars = {
+          source = "autoscaling"
+          events = ["DeleteScalingPolicy", "DeleteScheduledAction"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "backup-rule"
+        event_pattern_vars = {
+          source = "backup"
+          events = ["DeleteBackupPlan", "DeleteBackupVault"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "cloudformation-rule"
+        event_pattern_vars = {
+          source = "cloudformation"
+          events = ["DeleteStack", "DeleteStackInstances", "DeleteStackSet"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "cloudfront-rule"
+        event_pattern_vars = {
+          source = "cloudfront"
+          events = [
+            "CreateCloudFrontOriginAccessIdentity",
+            "DeleteDistribution",
+            "UpdateCloudFrontOriginAccessIdentity",
+            "UpdateDistribution"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "cloudtrail-rule"
+        event_pattern_vars = {
+          source = "cloudtrail"
+          events = ["DeleteTrail", "StopLogging", "UpdateTrail"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "codebuild-rule"
+        event_pattern_vars = {
+          source = "codebuild"
+          events = ["DeleteProject", "DeleteWebhook"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "config-rule"
+        event_pattern_vars = {
+          source = "config"
+          events = [
+            "DeleteConfigRule",
+            "DeleteConfigurationAggregator",
+            "DeleteConfigurationRecorder",
+            "DeleteEvaluationResults",
+            "DeleteRetentionConfiguration"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "dynamodb-rule"
+        event_pattern_vars = {
+          source = "dynamodb"
+          events = ["DeleteTable"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "ec2-rule"
+        event_pattern_vars = {
+          source = "ec2"
+          events = [
+            "CreateKeyPair",
+            "CreateRoute",
+            "CreateRouteTable",
+            "DeleteInternetGateway",
+            "DeleteKeyPair",
+            "DeleteNatGateway",
+            "DeleteRoute",
+            "DeleteRouteTable",
+            "DeleteSecurityGroup",
+            "DeleteSubnet",
+            "DeleteTransitGateway",
+            "DeleteTransitGatewayRoute",
+            "DeleteTransitGatewayRouteTable",
+            "DeleteVpc",
+            "DeleteVpcEndpoints",
+            "DeleteVpcPeeringConnection",
+            "DetachInternetGateway",
+            "DetachVolume",
+            "DisassociateRouteTable",
+            "ModifySubnetAttribute",
+            "ModifyVpcAttribute",
+            "ReplaceRoute",
+            "StopInstances",
+            "TerminateInstances"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "ecr-rule"
+        event_pattern_vars = {
+          source = "ecr"
+          events = [
+            "DeleteLifecyclePolicy",
+            "DeleteRepository",
+            "DeleteRepositoryPolicy"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "elasticache-rule"
+        event_pattern_vars = {
+          source = "elasticache"
+          events = ["DeleteCacheCluster"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "elasticbeanstalk-rule"
+        event_pattern_vars = {
+          source = "elasticbeanstalk"
+          events = ["DeleteApplication", "SwapEnvironmentCNAMEs"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "elasticloadbalancing-rule"
+        event_pattern_vars = {
+          source = "elasticloadbalancing"
+          events = [
+            "DeleteLoadBalancer",
+            "DeleteLoadBalancerListeners",
+            "DetachLoadBalancerFromSubnets",
+            "DisableAvailabilityZonesForLoadBalancer",
+            "ModifyLoadBalancerAttributes"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "ses-rule"
+        event_pattern_vars = {
+          source = "ses"
+          events = ["DeleteIdentity", "DeleteIdentity"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "events-rule"
+        event_pattern_vars = {
+          source = "events"
+          events = ["DeleteIdentity", "DeleteIdentity"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "kms-rule"
+        event_pattern_vars = {
+          source = "kms"
+          events = ["DisableKey", "ScheduleKeyDeletion"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "cloudwatch-logs-rule"
+        event_pattern_vars = {
+          source = "logs"
+          events = ["AssociateKmsKey"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "cloudwatch-monitoring-rule"
+        event_pattern_vars = {
+          source = "monitoring"
+          events = ["DeleteAlarms", "DeleteDashboards", "DisableAlarmActions"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "rds-rule"
+        event_pattern_vars = {
+          source = "rds"
+          events = [
+            "CreateDBCluster",
+            "CreateDBInstance",
+            "DeleteDBCluster",
+            "DeleteDBClusterParameterGroup",
+            "DeleteDBInstance",
+            "DeleteDBSubnetGroup",
+            "FailoverDBCluster",
+            "ModifyDBCluster",
+            "ModifyDBClusterParameterGroup",
+            "ModifyDBInstance",
+            "ModifyDBSubnetGroup",
+            "RebootDBInstance"
+          ]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "route53resolver-rule"
+        event_pattern_vars = {
+          source = "route53resolver"
+          events = ["DeleteResolverEndpoint", "DeleteResolverRule"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "secretsmanager-rule"
+        event_pattern_vars = {
+          source = "secretsmanager"
+          events = ["DeleteTopic", "Unsubscribe"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name = "ecs-rule"
+        event_pattern_vars = {
+          source = "ecs",
+          events = ["DeleteCluster", "UpdateCluster"]
+        }
+        targets = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name               = "cost-anomaly-detection-rule"
+        event_pattern_file = "cost-anomaly-detection"
+        targets            = [{ type = "sns", name = "vas-devops-events" }]
+      },
+      {
+        name               = "databases-storage-alert-rule"
+        event_pattern_file = "rds_instance_events"
+        event_pattern_vars = {
+          source = "rds",
+          sourceArns = [
+            "arn:aws:rds:us-west-2:512438066734:db:pulse-feed",
+            "arn:aws:rds:us-west-2:512438066734:db:vas-db-genetics",
+            "arn:aws:rds:us-west-2:512438066734:db:vas-db-pulse",
+            "arn:aws:rds:us-west-2:512438066734:db:platform-staging-partners-replica-1",
+            "arn:aws:rds:us-west-2:512438066734:db:platform-staging-replica-1"
+          ],
+          events = [
+            "RDS-EVENT-0089",
+            "RDS-EVENT-0007",
+            "RDS-EVENT-0227",
+            "RDS-EVENT-0222"
+          ]
+        }
+        targets = [
+          {
+            type = "sns",
+            name = "vas-devops-events"
+          }
+        ]
+      },
+      {
+        name               = "security-hub-notification-rule"
+        event_pattern_file = "security-hub-notification"
+        targets            = [{ type = "sns", name = "sns-alerts-security" }]
+      }
+    ]
+  }
+}
+
+
+
+
 Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
 $ grep -R "databases-storage-alert-rule" src/terraform/pulse/
 src/terraform/pulse/eventbridge/mangement.tfvars:        name               = "databases-storage-alert-rule"
