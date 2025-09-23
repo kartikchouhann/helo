@@ -1,3 +1,290 @@
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ terraform -chdir="src/terraform/pulse/eventbridge"  init --backend-config="${PWD}/src/terraform/pulse/env-sandbox/sandbox.conf"
+
+Initializing the backend...
+
+Successfully configured the backend "s3"! Terraform will automatically
+use this backend unless the backend configuration changes.
+Initializing modules...
+- eventbridge_oregon in ..\..\modules\eventbridge
+- eventbridge_virginia in ..\..\modules\eventbridge
+
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching "~> 4.0"...
+- Installing hashicorp/aws v4.67.0...
+- Installed hashicorp/aws v4.67.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ terraform -chdir="src/terraform/pulse/eventbridge" apply -input=false -var-file=sandbox.tfvars -var-file="${PWD}/src/terraform/pulse/env-sandbox/global.tfvars" -compact-warnings
+Acquiring state lock. This may take a few moments...
+module.eventbridge_virginia.data.aws_cloudwatch_event_bus.default: Reading...
+data.aws_caller_identity.current: Reading...
+module.eventbridge_oregon.data.aws_cloudwatch_event_bus.default: Reading...
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["cloudtrail-rule"]: Refreshing state... [id=cloudtrail-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["ecr-rule"]: Refreshing state... [id=ecr-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["autoscaling-rule"]: Refreshing state... [id=autoscaling-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["elasticache-rule"]: Refreshing state... [id=elasticache-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["route53resolver-rule"]: Refreshing state... [id=route53resolver-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["databases-storage-alert-rule"]: Refreshing state... [id=databases-storage-alert-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["dynamodb-rule"]: Refreshing state... [id=dynamodb-rule]
+data.aws_caller_identity.current: Read complete after 1s [id=792827266856]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["backup-rule"]: Refreshing state... [id=backup-rule]
+module.eventbridge_virginia.data.aws_cloudwatch_event_bus.default: Read complete after 1s [id=default]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["security-hub-notification-rule-critical"]: Refreshing state... [id=security-hub-notification-rule-critical]
+module.eventbridge_oregon.data.aws_cloudwatch_event_bus.default: Read complete after 1s [id=default]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["ec2-rule"]: Refreshing state... [id=ec2-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["dms-task-failure-rule"]: Refreshing state... [id=dms-task-failure-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["cloudwatch-logs-rule"]: Refreshing state... [id=cloudwatch-logs-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["cloudfront-rule"]: Refreshing state... [id=cloudfront-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["elasticloadbalancing-rule"]: Refreshing state... [id=elasticloadbalancing-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["codebuild-rule"]: Refreshing state... [id=codebuild-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["kms-rule"]: Refreshing state... [id=kms-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["acm-certificate-deletion-rule"]: Refreshing state... [id=acm-certificate-deletion-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["secretsmanager-rule"]: Refreshing state... [id=secretsmanager-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["apigateway-rule"]: Refreshing state... [id=apigateway-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["elasticbeanstalk-notification-rule"]: Refreshing state... [id=elasticbeanstalk-notification-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["ses-rule"]: Refreshing state... [id=ses-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["security-hub-notification-rule"]: Refreshing state... [id=security-hub-notification-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["cloudformation-rule"]: Refreshing state... [id=cloudformation-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["rds-rule"]: Refreshing state... [id=rds-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["ecs-rule"]: Refreshing state... [id=ecs-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["events-rule"]: Refreshing state... [id=events-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["config-rule"]: Refreshing state... [id=config-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["cost-anomaly-detection-rule"]: Refreshing state... [id=cost-anomaly-detection-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["elasticbeanstalk-rule"]: Refreshing state... [id=elasticbeanstalk-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_rule.this["cloudwatch-monitoring-rule"]: Refreshing state... [id=cloudwatch-monitoring-rule]
+module.eventbridge_virginia.aws_cloudwatch_event_rule.this["iam-rule"]: Refreshing state... [id=iam-rule]
+module.eventbridge_virginia.aws_cloudwatch_event_rule.this["s3-rule"]: Refreshing state... [id=s3-rule]
+module.eventbridge_virginia.aws_cloudwatch_event_rule.this["organizations-rule"]: Refreshing state... [id=organizations-rule]
+module.eventbridge_virginia.aws_cloudwatch_event_rule.this["route53-rule"]: Refreshing state... [id=route53-rule]
+module.eventbridge_virginia.aws_cloudwatch_event_rule.this["securityhub-rule"]: Refreshing state... [id=securityhub-rule]
+module.eventbridge_virginia.aws_cloudwatch_event_rule.this["acm-certificate-deletion-rule"]: Refreshing state... [id=acm-certificate-deletion-rule]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["elasticloadbalancing-rule-target-0"]: Refreshing state... [id=elasticloadbalancing-rule-terraform-20250305164819571500000009]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["backup-rule-target-0"]: Refreshing state... [id=backup-rule-terraform-20250305164819564900000004]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["elasticache-rule-target-0"]: Refreshing state... [id=elasticache-rule-terraform-20250305164820684200000015]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["route53resolver-rule-target-0"]: Refreshing state... [id=route53resolver-rule-terraform-20250305164819564700000003]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["ses-rule-target-0"]: Refreshing state... [id=ses-rule-terraform-20250305164820129200000011]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["elasticbeanstalk-rule-target-0"]: Refreshing state... [id=elasticbeanstalk-rule-terraform-2025030516482011190000000b]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["ecs-rule-target-0"]: Refreshing state... [id=ecs-rule-terraform-2024031811254418200000000a]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["rds-rule-target-0"]: Refreshing state... [id=rds-rule-terraform-20250305164819563400000001]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["events-rule-target-0"]: Refreshing state... [id=events-rule-terraform-20250305164820131100000012]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["codebuild-rule-target-0"]: Refreshing state... [id=codebuild-rule-terraform-2025030516482011440000000c]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["cloudfront-rule-target-0"]: Refreshing state... [id=cloudfront-rule-terraform-20250305164820123600000010]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["cloudtrail-rule-target-0"]: Refreshing state... [id=cloudtrail-rule-terraform-20250305164819567500000006]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["secretsmanager-rule-target-0"]: Refreshing state... [id=secretsmanager-rule-terraform-2025030516482012230000000e]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["cost-anomaly-detection-rule-target-0"]: Refreshing state... [id=cost-anomaly-detection-rule-terraform-20250305150317206800000001]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["autoscaling-rule-target-0"]: Refreshing state... [id=autoscaling-rule-terraform-20250305164819570500000008]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["cloudformation-rule-target-0"]: Refreshing state... [id=cloudformation-rule-terraform-20250305164820682100000014]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["acm-certificate-deletion-rule-target-0"]: Refreshing state... [id=acm-certificate-deletion-rule-terraform-20250305164819567500000007]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["databases-storage-alert-rule-target-0"]: Refreshing state... [id=databases-storage-alert-rule-terraform-20250513213219216100000001]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["security-hub-notification-rule-target-0"]: Refreshing state... [id=security-hub-notification-rule-terraform-20250610144432118500000001]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["ecr-rule-target-0"]: Refreshing state... [id=ecr-rule-terraform-20250305164820684300000016]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["config-rule-target-0"]: Refreshing state... [id=config-rule-terraform-2025030516482011560000000d]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["kms-rule-target-0"]: Refreshing state... [id=kms-rule-terraform-2025030516482012230000000f]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["apigateway-rule-target-0"]: Refreshing state... [id=apigateway-rule-terraform-20250305164819565100000005]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["cloudwatch-logs-rule-target-0"]: Refreshing state... [id=cloudwatch-logs-rule-terraform-20250305164820135300000013]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["ec2-rule-target-0"]: Refreshing state... [id=ec2-rule-terraform-20250305164820684400000017]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["dynamodb-rule-target-0"]: Refreshing state... [id=dynamodb-rule-terraform-20250305164819563400000002]
+module.eventbridge_oregon.aws_cloudwatch_event_target.this["cloudwatch-monitoring-rule-target-0"]: Refreshing state... [id=cloudwatch-monitoring-rule-terraform-2025030516481957460000000a]
+module.eventbridge_virginia.aws_cloudwatch_event_target.this["route53-rule-target-0"]: Refreshing state... [id=route53-rule-terraform-20250305164818800500000004]
+module.eventbridge_virginia.aws_cloudwatch_event_target.this["acm-certificate-deletion-rule-target-0"]: Refreshing state... [id=acm-certificate-deletion-rule-terraform-20250305164819007600000005]
+module.eventbridge_virginia.aws_cloudwatch_event_target.this["iam-rule-target-0"]: Refreshing state... [id=iam-rule-terraform-20250305164818724100000002]
+module.eventbridge_virginia.aws_cloudwatch_event_target.this["securityhub-rule-target-0"]: Refreshing state... [id=securityhub-rule-terraform-20250305164819015600000006]
+module.eventbridge_virginia.aws_cloudwatch_event_target.this["s3-rule-target-0"]: Refreshing state... [id=s3-rule-terraform-20250305164818556300000001]
+module.eventbridge_virginia.aws_cloudwatch_event_target.this["organizations-rule-target-0"]: Refreshing state... [id=organizations-rule-terraform-20250305164818780000000003]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  - destroy
+
+Terraform will perform the following actions:
+
+  # module.eventbridge_oregon.aws_cloudwatch_event_rule.this["databases-storage-alert-rule"] will be destroyed
+  # (because key ["databases-storage-alert-rule"] is not in for_each map)
+  - resource "aws_cloudwatch_event_rule" "this" {
+      - arn            = "arn:aws:events:us-west-2:792827266856:rule/databases-storage-alert-rule" -> null
+      - description    = "General event" -> null
+      - event_bus_name = "default" -> null
+      - event_pattern  = jsonencode(
+            {
+              - detail      = {
+                  - EventID   = [
+                      - "RDS-EVENT-0089",
+                      - "RDS-EVENT-0007",
+                      - "RDS-EVENT-0227",
+                      - "RDS-EVENT-0222",
+                    ]
+                  - SourceArn = [
+                      - "arn:aws:rds:us-west-2:792827266856:db:crud-users-db",
+                      - "arn:aws:rds:us-west-2:792827266856:db:agsource-alta-gps",
+                      - "arn:aws:rds:us-west-2:792827266856:cluster:datascience-platform-aurora-cluster",
+                      - "arn:aws:rds:us-west-2:792827266856:cluster:platform-prod-aurora",
+                      - "arn:aws:rds:us-west-2:792827266856:db:vas-db-genetics",
+                    ]
+                }
+              - detail-type = [
+                  - "RDS DB Instance Event",
+                ]
+              - source      = [
+                  - "aws.rds",
+                ]
+            }
+        ) -> null
+      - id             = "databases-storage-alert-rule" -> null
+      - is_enabled     = true -> null
+      - name           = "databases-storage-alert-rule" -> null
+      - tags           = {
+          - "Name" = "databases-storage-alert-rule"
+        } -> null
+      - tags_all       = {
+          - "Name"         = "databases-storage-alert-rule"
+          - "application"  = "terraform"
+          - "costcenter"   = "vas"
+          - "env"          = "sandbox"
+          - "managedby"    = "terraform"
+          - "map-migrated" = "migED85X1S2OJ"
+          - "owner"        = "VasDevOpsteam@vas.com"
+          - "product"      = "pulse"
+          - "project"      = "devops"
+        } -> null
+    }
+
+  # module.eventbridge_oregon.aws_cloudwatch_event_rule.this["dms-task-failure-rule"] will be destroyed
+  # (because key ["dms-task-failure-rule"] is not in for_each map)
+  - resource "aws_cloudwatch_event_rule" "this" {
+      - arn            = "arn:aws:events:us-west-2:792827266856:rule/dms-task-failure-rule" -> null
+      - description    = "General event" -> null
+      - event_bus_name = "default" -> null
+      - event_pattern  = jsonencode(
+            {
+              - detail      = {
+                  - ReplicationTaskStatus = [
+                      - "failed",
+                    ]
+                }
+              - detail-type = [
+                  - "DMS Replication Task State Change",
+                ]
+              - source      = [
+                  - "aws.dms",
+                ]
+            }
+        ) -> null
+      - id             = "dms-task-failure-rule" -> null
+      - is_enabled     = true -> null
+      - name           = "dms-task-failure-rule" -> null
+      - tags           = {} -> null
+      - tags_all       = {} -> null
+    }
+
+  # module.eventbridge_oregon.aws_cloudwatch_event_rule.this["elasticbeanstalk-notification-rule"] will be destroyed
+  # (because key ["elasticbeanstalk-notification-rule"] is not in for_each map)
+  - resource "aws_cloudwatch_event_rule" "this" {
+      - arn            = "arn:aws:events:us-west-2:792827266856:rule/elasticbeanstalk-notification-rule" -> null
+      - description    = "General event" -> null
+      - event_bus_name = "default" -> null
+      - event_pattern  = jsonencode(
+            {
+              - detail      = {
+                  - Severity = [
+                      - "Severe",
+                      - "Degraded",
+                    ]
+                }
+              - detail-type = [
+                  - "Health status change",
+                ]
+              - source      = [
+                  - "aws.elasticbeanstalk",
+                ]
+            }
+        ) -> null
+      - id             = "elasticbeanstalk-notification-rule" -> null
+      - is_enabled     = true -> null
+      - name           = "elasticbeanstalk-notification-rule" -> null
+      - tags           = {
+          - "Name" = "elasticbeanstalk-notification-rule"
+        } -> null
+      - tags_all       = {
+          - "Name"         = "elasticbeanstalk-notification-rule"
+          - "application"  = "terraform"
+          - "costcenter"   = "vas"
+          - "env"          = "sandbox"
+          - "managedby"    = "terraform"
+          - "map-migrated" = "migED85X1S2OJ"
+          - "owner"        = "VasDevOpsteam@vas.com"
+          - "product"      = "pulse"
+          - "project"      = "devops"
+        } -> null
+    }
+
+  # module.eventbridge_oregon.aws_cloudwatch_event_target.this["databases-storage-alert-rule-target-0"] will be destroyed
+  # (because key ["databases-storage-alert-rule-target-0"] is not in for_each map)
+  - resource "aws_cloudwatch_event_target" "this" {
+      - arn            = "arn:aws:sns:us-west-2:792827266856:vas-devops-events" -> null
+      - event_bus_name = "default" -> null
+      - id             = "databases-storage-alert-rule-terraform-20250513213219216100000001" -> null
+      - rule           = "databases-storage-alert-rule" -> null
+      - target_id      = "terraform-20250513213219216100000001" -> null
+    }
+
+  # module.eventbridge_oregon.aws_cloudwatch_event_target.this["security-hub-notification-rule-critical-target-0"] will be created
+  + resource "aws_cloudwatch_event_target" "this" {
+      + arn            = "arn:aws:sns:us-west-2:792827266856:sns-alerts-critical"
+      + event_bus_name = "default"
+      + id             = (known after apply)
+      + rule           = "security-hub-notification-rule-critical"
+      + target_id      = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 4 to destroy.
+
+Warnings:
+
+- Value for undeclared variable
+
+To see the full warning notes, run Terraform without -compact-warnings.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: no
+
+Apply cancelled.
+Releasing state lock. This may take a few moments...
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Background
 
 DEVOPS-3503 – cleanup of EventBridge rules.
