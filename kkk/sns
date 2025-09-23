@@ -1,3 +1,31 @@
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT
+$ ./aws.sh
+Searching EventBridge rules with ECS targets in us-west-2 ...
+== Rule: iam-audit-task ==
+arn:aws:ecs:us-west-2:792827266856:task-definition/iam_audit:1
+
+Quick search for rules mentioning 'genetics'...
+            "EventPattern": "{\"detail\":{\"EventID\":[\"RDS-EVENT-0089\",\"RDS-EVENT-0007\",\"RDS-EVENT-0227\",\"RDS-EVENT-0222\"],\"SourceArn\":[\"arn:aws:rds:us-west-2:792827266856:db:crud-users-db\",\"arn:aws:rds:us-west-2:792827266856:db:agsource-alta-gps\",\"arn:aws:rds:us-west-2:792827266856:cluster:datascience-platform-aurora-cluster\",\"arn:aws:rds:us-west-2:792827266856:cluster:platform-prod-aurora\",\"arn:aws:rds:us-west-2:792827266856:db:vas-db-genetics\"]},\"detail-type\":[\"RDS DB Instance Event\"],\"source\":[\"aws.rds\"]}",
+
+Checking EventBridge Scheduler schedules mentioning 'genetics'...
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #!/bin/bash
 set -euo pipefail
 
