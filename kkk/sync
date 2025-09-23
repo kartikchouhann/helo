@@ -1,3 +1,13 @@
+https://developer.hashicorp.com/terraform/language/functions/file
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_policy
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
+
+Right now all SNS topic policies are written inline inside management.tfvars, which makes the files very large, hard to review, and inconsistent in formatting.
+
+The plan is to move each policy into its own JSON file and then just reference those files in management.tfvars. In main.tf, the policy will be loaded using the file() function instead of embedding the JSON. This will make the codebase cleaner, easier to review, and consistent across environments.
+
+So far, I’ve updated the variable definition to handle file paths, created the first JSON file (vas-platform-integrations), and updated main.tf + management.tfvars accordingly. Next, we will migrate the remaining topics into JSON files and validate with plan/apply.
+
 I’ve been working on DEVOPS-3503 and made the code changes to remove the databases-storage-alert-rule from sandbox. To validate, I ran terraform apply locally (with auto-approval disabled).
 
 The plan correctly showed the databases-storage-alert-rule and its target scheduled for destroy, but it also flagged two additional rules (dms-task-failure-rule and elasticbeanstalk-notification-rule) for removal, plus one SNS target addition. I cancelled the apply at the prompt so no changes were made.
