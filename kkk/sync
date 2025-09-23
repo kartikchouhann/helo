@@ -1,3 +1,22 @@
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R "aws_cloudwatch_event_rule" src/terraform/pulse/
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R "aws_cloudwatch_event_target" src/terraform/pulse/
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R "aws_scheduler_schedule" src/terraform/pulse/
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R "RunTask" src/terraform/pulse/
+src/terraform/pulse/security/iam/role_policies/ecs-events-policy.json:            "ecs:RunTask"
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+
+
+
+
 # look for eventbridge resources
 grep -R "aws_cloudwatch_event_rule" src/terraform/pulse/
 
