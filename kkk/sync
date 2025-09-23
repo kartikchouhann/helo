@@ -1,3 +1,18 @@
+I’ve been working on DEVOPS-3503 and made the code changes to remove the databases-storage-alert-rule from sandbox. To validate, I ran terraform apply locally (with auto-approval disabled).
+
+The plan correctly showed the databases-storage-alert-rule and its target scheduled for destroy, but it also flagged two additional rules (dms-task-failure-rule and elasticbeanstalk-notification-rule) for removal, plus one SNS target addition. I cancelled the apply at the prompt so no changes were made.
+
+Can you confirm if those extra rules are expected to be removed, or if we need to re-add them back to the tfvars?
+
+
+
+
+
+
+
+
+
+
 Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
 $ terraform -chdir="src/terraform/pulse/eventbridge"  init --backend-config="${PWD}/src/terraform/pulse/env-sandbox/sandbox.conf"
 
