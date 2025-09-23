@@ -1,3 +1,6 @@
+file("${path.module}/${each.value.policy}")
+
+
 variable "topic_policies" {
   type = list(object({
     topic_arn = string
