@@ -1,3 +1,20 @@
+Background
+DEVOPS-3503
+
+As part of DEVOPS-3503, we are decommissioning the EventBridge rule databases-storage-alert-rule.
+This rule was listening to RDS genetics DB events (vas-db-genetics) and publishing notifications to the vas-devops-events SNS topic.
+The rule is no longer required post-migration and must be removed.
+
+Diagrams and Screenshots
+Checklist
+ I ran the pre-commit linter - format, tfsec, checkov
+ I have validate the security and static analysis output
+ I have deployed to AWS and confirmed the changes work
+ I have attached a screenshot of the deployed resources (minus sensitive pieces, if applicable)
+ I updated the documentation, if necessary - links of updated docs provided
+
+
+
 I have create the pr but github action ci is geetig fail 
 
 Run terraform -chdir=src/terraform/pulse/eventbridge plan -input=false -no-color -var-file=staging.tfvars -var-file="${PWD}/src/terraform/pulse/env-staging/global.tfvars" -out=eventbridge-5749fdfdc0db052d5e3987e834091480d7d091f2-staging.tfplan
