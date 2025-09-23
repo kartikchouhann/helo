@@ -1,3 +1,39 @@
+#!/bin/bash
+set -euo pipefail
+
+REGION="us-west-2"
+
+echo "Searching EventBridge rules with ECS targets in $REGION ..."
+
+for r in $(aws events list-rules --region "$REGION" --query 'Rules[].Name' --output text); do
+  ecs_targets=$(aws events list-targets-by-rule --region "$REGION" --rule "$r" \
+    --query 'Targets[?EcsParameters!=null]' --output text || true)
+
+  if [[ -n "$ecs_targets" ]]; then
+    echo "== Rule: $r =="
+    aws events list-targets-by-rule --region "$REGION" --rule "$r" --output json \
+      | grep -Eio '"taskDefinitionArn"[^"]*"[^"]+' | sed 's/.*"//'
+  fi
+done
+
+echo
+echo "Quick search for rules mentioning 'genetics'..."
+aws events list-rules --region "$REGION" --output json | grep -i genetics || true
+
+echo
+echo "Checking EventBridge Scheduler schedules mentioning 'genetics'..."
+aws scheduler list-schedules --region "$REGION" --query 'Schedules[].Name' --output text \
+  | tr '\t' '\n' | grep -i genetics || true
+
+
+
+
+
+
+
+
+
+
 # List rules that have ECS targets
 for r in $(aws events list-rules --region us-west-2 --query 'Rules[].Name' --output text); do
   if aws events list-targets-by-rule --region us-west-2 --rule "$r" \
