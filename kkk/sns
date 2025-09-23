@@ -1,3 +1,249 @@
+Good Morning @Carlos Rodríguez
+I am working on DevOps Sprint 66 - DevOps Scrum Board - Scrum Board - VAS JIRA and made the code changes to remove the databases-storage-alert-rule from sandbox. To validate, I ran terraform apply locally (with auto-approval disabled).
+The plan correctly showed the databases-storage-alert-rule and its target scheduled for destroy, but it also flagged two additional rules (dms-task-failure-rule and elasticbeanstalk-notification-rule) for removal, plus one SNS target addition. I cancelled the apply at the prompt so no changes were made.
+Can you confirm if those extra rules are expected to be removed, or if we need to re-add them back to the tfvars?
+this is the PR regarding those changes
+[DEVOPS-3503] removed the EventBridge rule as part of DEVOPS-3503 by Salma-Sheref-VAS · Pull Request #1430 · vas-dev/vas-devops-pulse (edited) 
+8:18
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  - destroy
+Terraform will perform the following actions:
+  # module.eventbridge_oregon.aws_cloudwatch_event_rule.this["databases-storage-alert-rule"] will be destroyed
+  # (because key ["databases-storage-alert-rule"] is not in for_each map)
+  - resource "aws_cloudwatch_event_rule" "this" {
+      - arn            = "arn:aws:events:us-west-2:792827266856:rule/databases-storage-alert-rule" -> null
+      - description    = "General event" -> null
+      - event_bus_name = "default" -> null
+      - event_pattern  = jsonencode(
+            {
+              - detail      = {
+                  - EventID   = [
+                      - "RDS-EVENT-0089",
+                      - "RDS-EVENT-0007",
+                      - "RDS-EVENT-0227",
+                      - "RDS-EVENT-0222",
+                    ]
+                  - SourceArn = [
+                      - "arn:aws:rds:us-west-2:792827266856:db:crud-users-db",
+                      - "arn:aws:rds:us-west-2:792827266856:db:agsource-alta-gps",
+                      - "arn:aws:rds:us-west-2:792827266856:cluster:datascience-platform-aurora-cluster",
+                      - "arn:aws:rds:us-west-2:792827266856:cluster:platform-prod-aurora",
+                      - "arn:aws:rds:us-west-2:792827266856:db:vas-db-genetics",
+                    ]
+                }
+              - detail-type = [
+                  - "RDS DB Instance Event",
+                ]
+              - source      = [
+                  - "aws.rds",
+                ]
+            }
+        ) -> null
+      - id             = "databases-storage-alert-rule" -> null
+      - is_enabled     = true -> null
+      - name           = "databases-storage-alert-rule" -> null
+      - tags           = {
+          - "Name" = "databases-storage-alert-rule"
+        } -> null
+      - tags_all       = {
+          - "Name"         = "databases-storage-alert-rule"
+          - "application"  = "terraform"
+          - "costcenter"   = "vas"
+          - "env"          = "sandbox"
+          - "managedby"    = "terraform"
+          - "map-migrated" = "migED85X1S2OJ"
+          - "owner"        = "VasDevOpsteam@vas.com"
+          - "product"      = "pulse"
+          - "project"      = "devops"
+        } -> null
+    }
+  # module.eventbridge_oregon.aws_cloudwatch_event_rule.this["dms-task-failure-rule"] will be destroyed
+  # (because key ["dms-task-failure-rule"] is not in for_each map)
+  - resource "aws_cloudwatch_event_rule" "this" {
+      - arn            = "arn:aws:events:us-west-2:792827266856:rule/dms-task-failure-rule" -> null
+      - description    = "General event" -> null
+      - event_bus_name = "default" -> null
+      - event_pattern  = jsonencode(
+            {
+              - detail      = {
+                  - ReplicationTaskStatus = [
+                      - "failed",
+                    ]
+                }
+              - detail-type = [
+                  - "DMS Replication Task State Change",
+                ]
+              - source      = [
+                  - "aws.dms",
+                ]
+            }
+        ) -> null
+      - id             = "dms-task-failure-rule" -> null
+      - is_enabled     = true -> null
+      - name           = "dms-task-failure-rule" -> null
+      - tags           = {} -> null
+      - tags_all       = {} -> null
+    }
+  # module.eventbridge_oregon.aws_cloudwatch_event_rule.this["elasticbeanstalk-notification-rule"] will be destroyed
+  # (because key ["elasticbeanstalk-notification-rule"] is not in for_each map)
+  - resource "aws_cloudwatch_event_rule" "this" {
+      - arn            = "arn:aws:events:us-west-2:792827266856:rule/elasticbeanstalk-notification-rule" -> null
+      - description    = "General event" -> null
+      - event_bus_name = "default" -> null
+      - event_pattern  = jsonencode(
+            {
+              - detail      = {
+                  - Severity = [
+                      - "Severe",
+                      - "Degraded",
+                    ]
+                }
+              - detail-type = [
+                  - "Health status change",
+                ]
+              - source      = [
+                  - "aws.elasticbeanstalk",
+                ]
+            }
+        ) -> null
+      - id             = "elasticbeanstalk-notification-rule" -> null
+      - is_enabled     = true -> null
+      - name           = "elasticbeanstalk-notification-rule" -> null
+      - tags           = {
+          - "Name" = "elasticbeanstalk-notification-rule"
+        } -> null
+      - tags_all       = {
+          - "Name"         = "elasticbeanstalk-notification-rule"
+          - "application"  = "terraform"
+          - "costcenter"   = "vas"
+          - "env"          = "sandbox"
+          - "managedby"    = "terraform"
+          - "map-migrated" = "migED85X1S2OJ"
+          - "owner"        = "VasDevOpsteam@vas.com"
+          - "product"      = "pulse"
+          - "project"      = "devops"
+        } -> null
+    }
+  # module.eventbridge_oregon.aws_cloudwatch_event_target.this["databases-storage-alert-rule-target-0"] will be destroyed
+  # (because key ["databases-storage-alert-rule-target-0"] is not in for_each map)
+  - resource "aws_cloudwatch_event_target" "this" {
+      - arn            = "arn:aws:sns:us-west-2:792827266856:vas-devops-events" -> null
+      - event_bus_name = "default" -> null
+      - id             = "databases-storage-alert-rule-terraform-20250513213219216100000001" -> null
+      - rule           = "databases-storage-alert-rule" -> null
+      - target_id      = "terraform-20250513213219216100000001" -> null
+    }
+  # module.eventbridge_oregon.aws_cloudwatch_event_target.this["security-hub-notification-rule-critical-target-0"] will be created
+  + resource "aws_cloudwatch_event_target" "this" {
+      + arn            = "arn:aws:sns:us-west-2:792827266856:sns-alerts-critical"
+      + event_bus_name = "default"
+      + id             = (known after apply)
+      + rule           = "security-hub-notification-rule-critical"
+      + target_id      = (known after apply)
+    }
+Plan: 1 to add, 0 to change, 4 to destroy.
+Warnings:
+- Value for undeclared variable
+To see the full warning notes, run Terraform without -compact-warnings.
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+  Enter a value: no
+Apply cancelled.
+Releasing state lock. This may take a few moments...
+
+
+Carlos Rodríguez
+  10:00 PM
+Hi Salma, is this plan for sandbox?
+10:00
+If it's for Sandbox don't worry too much about it, just apply whatever it's on main
+
+
+salma sheref
+  10:00 PM
+Yes.
+
+
+Carlos Rodríguez
+  10:00 PM
+Just check how's the plan for staging and prod
+
+
+salma sheref
+  10:01 PM
+I think we do not need to do for staging and prod (edited) 
+
+
+Carlos Rodríguez
+  10:04 PM
+Why does your PR does not match with the title of the task?
+10:04
+what's your PR has to do with genetics sync?
+10:04
+I think the task lack of good description as well
+
+
+salma sheref
+  10:05 PM
+yes the task don't have enough description
+
+
+Carlos Rodríguez
+  10:07 PM
+And removing databases-storage-alert-rule doesn't seem to be related with the title: Decommission genetics-sync-fargate-task EB Rule
+10:07
+Now why would genetics-sync rule would want to be removed?
+10:07
+I mean it could be removed from a specific environment
+10:08
+from morpheus or from sandbox
+
+
+salma sheref
+  10:11 PM
+so the genetics database is already decommission form sand box environment
+10:11
+that's why I remove form sandbox environment
+New
+
+
+Carlos Rodríguez
+  10:12 PM
+but you are removing not only for genetics
+10:12
+image.png
+ 
+image.png
+
+
+10:12
+you are removing for all those databases
+10:13
+anyway, your PR does not match what you were asked to do in the task
+
+
+salma sheref
+  10:14 PM
+ok let me check with sheela to add more information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 terraform -chdir="src/terraform/pulse/security/policies/messaging/sns" plan \
   -var-file=management.tfvars \
   -var="environment=sandbox" \
