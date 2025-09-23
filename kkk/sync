@@ -1,3 +1,84 @@
+Removed the EventBridge rule `databases-storage-alert-rule` as part of DEVOPS-3503. 
+Tested in sandbox – confirmed Terraform destroyed the rule/target and AWS CLI shows it’s gone. 
+SNS topic `vas-devops-events` remains intact. 
+Ready for review.
+
+
+
+Background
+
+As part of DEVOPS-3503, we are decommissioning the EventBridge rule databases-storage-alert-rule.
+This rule was listening to RDS genetics DB events (vas-db-genetics) and publishing notifications to the vas-devops-events SNS topic.
+The rule is no longer required post-migration and must be removed from all environments.
+
+What was changed
+
+Removed the databases-storage-alert-rule block from:
+
+sandbox.tfvars
+
+staging.tfvars
+
+prod.tfvars
+
+(also checked management/security — no further references found).
+
+Retained the vas-devops-events SNS topic, since other rules still publish to it.
+
+No other EventBridge rules were modified.
+
+Validation
+
+Ran terraform plan in sandbox:
+
+Confirmed only the EventBridge rule and target show as - destroy.
+
+Applied in sandbox:
+
+Verified with aws events list-rules --region us-west-2 → databases-storage-alert-rule no longer present.
+
+Confirmed vas-devops-events SNS topic still exists and is used by other rules.
+
+Staging/Prod promotion to follow after approvals.
+
+Rollback
+
+Re-add the same block into tfvars and apply; Terraform will re-create the rule and target.
+
+🔹 Screenshots & Evidence (attach in PR)
+
+📸 Terraform plan output (showing - destroy).
+
+📸 AWS CLI aws events list-rules after sandbox apply (showing rule removed).
+
+🔹 Checklist
+
+ I ran the pre-commit linter (format, tfsec, checkov)
+
+ I validated the security and static analysis output
+
+ I deployed to sandbox and confirmed the EventBridge rule was removed
+
+ I will promote to staging and prod after PR approval
+
+ I updated documentation if necessary
+
+🔹 Short GitHub Comment (for reviewers)
+Removed the EventBridge rule `databases-storage-alert-rule` as part of DEVOPS-3503. 
+Tested in sandbox – confirmed Terraform destroyed the rule/target and AWS CLI shows it’s gone. 
+SNS topic `vas-devops-events` remains intact. 
+Ready for review.
+
+
+
+
+
+
+
+
+
+
+
 eventbridge = {
   virginia = {
     rules = [
