@@ -1,0 +1,50 @@
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R  genetics_sync* src/terraform/pulse/
+src/terraform/pulse/compute/ecs/fargate/genetics-sync-microservice/main.tf:        secret_GeneticsConnection = data.terraform_remote_state.secrets.outputs.secrets_arns["rds_mysql_genetics_sync_connection_url_secret"]
+src/terraform/pulse/compute/ecs/fargate/genetics-sync-microservice/main.tf:        secret_SerilogApiKey      = data.terraform_remote_state.secrets.outputs.secrets_arns["serilog_genetics_sync_api_secret"]
+src/terraform/pulse/container/ecr/prod.tfvars:  genetics_sync = {
+src/terraform/pulse/container/ecr/sandbox.tfvars:  genetics_sync = {
+src/terraform/pulse/container/ecr/staging.tfvars:  genetics_sync = {
+src/terraform/pulse/env-backup/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-data/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-logs/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-logs-prod/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-management/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-morpheus/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-prod/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-sandbox/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-staging/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/monitoring/cloudwatch/dashboards/variables.tf:    genetics_sync_service_name_statefile    = string
+src/terraform/pulse/security/secrets-manager/prod.tfvars:    key_name    = "rds_mysql_genetics_sync_connection_url_secret"
+src/terraform/pulse/security/secrets-manager/prod.tfvars:    key_name    = "serilog_genetics_sync_api_secret"
+src/terraform/pulse/security/secrets-manager/sandbox.tfvars:    key_name    = "rds_mysql_genetics_sync_connection_url_secret"
+src/terraform/pulse/security/secrets-manager/sandbox.tfvars:    key_name    = "serilog_genetics_sync_api_secret"
+src/terraform/pulse/security/secrets-manager/staging.tfvars:    key_name    = "rds_mysql_genetics_sync_connection_url_secret"
+src/terraform/pulse/security/secrets-manager/staging.tfvars:    key_name    = "serilog_genetics_sync_api_secret"
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
+$ grep -R  genetics_sync* src/terraform/pulse/
+src/terraform/pulse/compute/ecs/fargate/genetics-sync-microservice/main.tf:        secret_GeneticsConnection = data.terraform_remote_state.secrets.outputs.secrets_arns["rds_mysql_genetics_sync_connection_url_secret"]
+src/terraform/pulse/compute/ecs/fargate/genetics-sync-microservice/main.tf:        secret_SerilogApiKey      = data.terraform_remote_state.secrets.outputs.secrets_arns["serilog_genetics_sync_api_secret"]
+src/terraform/pulse/container/ecr/prod.tfvars:  genetics_sync = {
+src/terraform/pulse/container/ecr/sandbox.tfvars:  genetics_sync = {
+src/terraform/pulse/container/ecr/staging.tfvars:  genetics_sync = {
+src/terraform/pulse/env-backup/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-data/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-logs/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-logs-prod/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-management/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-morpheus/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-prod/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-sandbox/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/env-staging/global.tfvars:  genetics_sync_service_name_statefile    = "terraform/pulse/compute/fargate/genetics-sync-microservice/terraform.tfstate"
+src/terraform/pulse/monitoring/cloudwatch/dashboards/variables.tf:    genetics_sync_service_name_statefile    = string
+src/terraform/pulse/security/secrets-manager/prod.tfvars:    key_name    = "rds_mysql_genetics_sync_connection_url_secret"
+src/terraform/pulse/security/secrets-manager/prod.tfvars:    key_name    = "serilog_genetics_sync_api_secret"
+src/terraform/pulse/security/secrets-manager/sandbox.tfvars:    key_name    = "rds_mysql_genetics_sync_connection_url_secret"
+src/terraform/pulse/security/secrets-manager/sandbox.tfvars:    key_name    = "serilog_genetics_sync_api_secret"
+src/terraform/pulse/security/secrets-manager/staging.tfvars:    key_name    = "rds_mysql_genetics_sync_connection_url_secret"
+src/terraform/pulse/security/secrets-manager/staging.tfvars:    key_name    = "serilog_genetics_sync_api_secret"
+
+Salma Sheref@SalmaSheref MINGW64 ~/Documents/GIT/vas-devops-pulse (DEVOPS-3503-Decommission-genetics-sync-fargate-task-EB-Rule)
