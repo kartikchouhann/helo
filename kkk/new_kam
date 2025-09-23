@@ -1,3 +1,10 @@
+variable "topic_policies" {
+  type = list(object({
+    topic_arn = string
+    policy    = string
+  }))
+}
+
 
 {
   "Version": "2012-10-17",
