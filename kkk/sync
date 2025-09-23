@@ -1,3 +1,19 @@
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws events list-targets-by-rule --rule databases-storage-alert-rule  --region us-west-2
+{
+    "Targets": [
+        {
+            "Id": "terraform-20250513213219216100000001",
+            "Arn": "arn:aws:sns:us-west-2:792827266856:vas-devops-events"
+        }
+    ]
+}
+
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$
+
+
 aws events list-targets-by-rule --rule databases-storage-alert-rule  --region us-west-2
 
 
