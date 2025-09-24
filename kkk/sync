@@ -1,3 +1,15 @@
+Thanks Pete — could you clarify exactly which EventBridge rule we should be decommissioning for genetics-sync? I checked the repo and found the databases-storage-alert-rule tied to RDS genetics DB events, but Carlos mentioned the task title implies an ECS/Fargate task rule. Just want to make sure we’re removing the right resource.
+
+
+
+
+
+
+
+
+
+
+
 https://developer.hashicorp.com/terraform/language/functions/file
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_policy
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
