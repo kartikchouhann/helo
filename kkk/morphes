@@ -1,3 +1,18 @@
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse> dir /s morpheus.tfvars
+dir : Cannot find path 'C:\s' because it does not exist.
+At line:1 char:1
++ dir /s morpheus.tfvars
++ ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\s:String) [Get-ChildItem], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse> 
+
+
+
+
+
+
 cd src\terraform\pulse
 dir /s morpheus.tfvars
 
