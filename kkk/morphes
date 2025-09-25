@@ -1,3 +1,78 @@
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws cloudwatch get-metric-statistics \
+  --namespace AWS/Events \
+  --metric-name Invocations \
+  --dimensions Name=RuleName,Value=genetics-sync-fargate-task \
+  --start-time $(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ) \
+  --end-time $(date -u +%Y-%m-%dT%H:%M:%SZ) \
+  --period 86400 \
+  --statistics Sum \
+  --region us-west-2
+{
+    "Label": "Invocations",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-09-11T13:18:00+00:00",
+            "Sum": 1.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2025-09-14T13:18:00+00:00",
+            "Sum": 1.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2025-09-13T13:18:00+00:00",
+            "Sum": 1.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2025-09-12T13:18:00+00:00",
+            "Sum": 1.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2025-09-15T13:18:00+00:00",
+            "Sum": 1.0,
+            "Unit": "Count"
+        }
+    ]
+}
+
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws ecs list-tasks \
+  --cluster platform-cluster-staging \
+  --service-name genetics-sync-task-staging \
+  --region us-west-2
+
+An error occurred (ServiceNotFoundException) when calling the ListTasks operation: Service not found.
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws ecs describe-tasks \
+  --cluster platform-cluster-staging \
+  --tasks <task-arn-from-above> \
+  --region us-west-2
+bash: task-arn-from-above: No such file or directory
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1. Check EventBridge Rule Invocations (CloudWatch)
 aws cloudwatch get-metric-statistics \
   --namespace AWS/Events \
