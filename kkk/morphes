@@ -1,3 +1,58 @@
+1. Check EventBridge Rule Invocations (CloudWatch)
+aws cloudwatch get-metric-statistics \
+  --namespace AWS/Events \
+  --metric-name Invocations \
+  --dimensions Name=RuleName,Value=genetics-sync-fargate-task \
+  --start-time $(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ) \
+  --end-time $(date -u +%Y-%m-%dT%H:%M:%SZ) \
+  --period 86400 \
+  --statistics Sum \
+  --region us-west-2
+
+
+👉 This will show if the rule has triggered in the last 14 days. Look at the "Datapoints" array. If Sum > 0, it was invoked.
+
+2. Check ECS Task Runs Triggered by Rule
+
+Since the target is ECS Fargate, confirm if that task ran recently:
+
+aws ecs list-tasks \
+  --cluster platform-cluster-staging \
+  --service-name genetics-sync-task-staging \
+  --region us-west-2
+
+
+Then describe the latest task(s) for timestamps:
+
+aws ecs describe-tasks \
+  --cluster platform-cluster-staging \
+  --tasks <task-arn-from-above> \
+  --region us-west-2
+
+✅ Reply to Pete
+
+After running, you can say something like:
+
+I checked CloudWatch metrics for the genetics-sync-fargate-task rule — no recent invocations in the past 14 days (0 datapoints). Also validated ECS task history, and there haven’t been any runs triggered by this rule. Looks safe to decommission.
+
+(or update if you do see activity).
+
+Do you want me to also give you a short one-liner reply draft for Pete once you confirm no activity?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Hey @Pete Dias @Carlos Rodríguez,
 I tracked down the history of the genetics-sync-fargate-task EventBridge rule. It was originally created via Terraform under src/terraform/pulse/monitoring/cloudwatch/event-rules/fargate (from PR DEVOPS-1041), but that entire folder/module has since been deleted from main.
 
