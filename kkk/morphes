@@ -1,3 +1,18 @@
+Hey @Pete Dias @Carlos Rodríguez,
+I tracked down the history of the genetics-sync-fargate-task EventBridge rule. It was originally created via Terraform under src/terraform/pulse/monitoring/cloudwatch/event-rules/fargate (from PR DEVOPS-1041), but that entire folder/module has since been deleted from main.
+
+So the rule still exists in AWS, but it’s no longer managed by our current Terraform (an orphaned resource). Could you confirm how you’d like me to handle this?
+
+Should I just delete it manually in AWS since it’s out of IaC?
+
+Or should we re-import/recreate it in Terraform and then remove it properly?
+
+Want to make sure I don’t break anything by taking the wrong approach.
+
+
+
+
+
 $ aws events list-tags-for-resource \
   --resource-arn arn:aws:events:us-west-2:586815333384:rule/genetics-sync-fargate-task \
   --region us-west-2
