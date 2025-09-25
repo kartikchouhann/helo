@@ -1,3 +1,55 @@
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse> cd .\src\terraform\pulse\eventbridge\
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\eventbridge> tree /f
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 8AD3-73D0
+C:.
+│   config.tf
+│   data.tf
+│   main.tf
+│   mangement.tfvars
+│   prod.tfvars
+│   sandbox.tfvars
+│   security.tfvars
+│   staging.tfvars
+│   variables.tf
+│
+├───.terragrunt
+│       skip.env
+│       terragrunt.hcl
+│
+├───event_patterns
+│       call_via_cloudtrail.json
+│       cost-anomaly-detection.json
+│       rds_instance_events.json
+│       security-hub-notification.json
+│
+└───rules
+    └───http
+        │   config.tf
+        │   data.tf
+        │   main.tf
+        │   prod.tfvars
+        │   sandbox.tfvars
+        │   staging.tfvars
+        │   variables.tf
+        │
+        └───.terragrunt
+                skip.env
+                terragrunt.hcl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Salma Sheref@SalmaSheref MINGW64 ~
 $ aws events list-targets-by-rule   --rule genetics-sync-fargate-task   --region us-west-2
 {
