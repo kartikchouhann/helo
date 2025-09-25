@@ -1,3 +1,9 @@
+Hi @Pete Dias,
+I checked the EventBridge rule in the AWS console. The genetics-sync-fargate-task rule is still present but currently Disabled, and the CloudWatch monitoring shows no invocations or matched events recently.
+
+
+
+
 Salma Sheref@SalmaSheref MINGW64 ~
 $ aws cloudwatch get-metric-statistics \
   --namespace AWS/Events \
