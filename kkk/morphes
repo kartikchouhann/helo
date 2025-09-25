@@ -1,3 +1,38 @@
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws events list-rules --region us-west-2 | grep -i genetics
+            "Name": "genetics-sync-fargate-task",
+            "Arn": "arn:aws:events:us-west-2:586815333384:rule/genetics-sync-fargate-task",
+            "Description": "Fire up genetics sync SQL exchange on a timed schedule.",
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1. Identify the genetics-sync rule in Morpheus
 
 Run a search for all EventBridge rules in Morpheus account:
