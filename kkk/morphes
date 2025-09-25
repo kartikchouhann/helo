@@ -1,0 +1,73 @@
+1. Identify the genetics-sync rule in Morpheus
+
+Run a search for all EventBridge rules in Morpheus account:
+
+aws events list-rules --region us-west-2 --profile morpheus
+
+
+Filter for genetics-sync:
+
+aws events list-rules --region us-west-2 --profile morpheus | grep -i genetics
+
+
+If nothing shows up, check for ECS targets:
+
+aws events list-targets-by-rule --rule <rule-name> --region us-west-2 --profile morpheus
+
+2. Confirm the service doesn’t exist anymore
+
+Since Pete’s note says “ensure the service truly doesn’t exist prior to decommissioning”:
+
+Check ECS tasks or services in Morpheus:
+
+aws ecs list-services --cluster <cluster-name> --region us-west-2 --profile morpheus | grep genetics
+aws ecs list-task-definitions --region us-west-2 --profile morpheus | grep genetics
+
+
+If you still see a genetics-sync Fargate service or task definition, confirm with the team before removing the rule.
+
+3. Update Terraform code
+
+Navigate to:
+
+src/terraform/pulse/eventbridge
+
+
+Locate the Morpheus tfvars file (likely: morpheus.tfvars or inside env-morpheus/global.tfvars).
+
+Remove only the genetics-sync-fargate-task rule block.
+
+⚠️ Do not touch databases-storage-alert-rule (that was the earlier confusion).
+
+Only delete the specific genetics-sync entry.
+
+4. Test plan in Morpheus
+
+Run terraform plan to make sure only the genetics-sync rule is marked for destroy:
+
+terraform -chdir="src/terraform/pulse/eventbridge" plan \
+  -var-file=morpheus.tfvars \
+  -var-file="${PWD}/src/terraform/pulse/env-morpheus/global.tfvars" \
+  -compact-warnings
+
+
+Expected result:
+
+Only the genetics-sync-fargate-task rule + its target is flagged for destroy.
+
+No unrelated rules (like DMS or ElasticBeanstalk) should be touched.
+
+5. Apply the change
+
+If the plan looks correct:
+
+terraform -chdir="src/terraform/pulse/eventbridge" apply \
+  -var-file=morpheus.tfvars \
+  -var-file="${PWD}/src/terraform/pulse/env-morpheus/global.tfvars" \
+  -compact-warnings -auto-approve
+
+6. Validate post-apply
+
+Verify the rule is gone:
+
+aws events list-rules --region us-west-2 --profile morpheus | grep -i genetics
