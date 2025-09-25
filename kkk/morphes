@@ -1,3 +1,35 @@
+# Check you’re in the right account
+aws sts get-caller-identity
+
+# Confirm the rule exists (Morpheus account)
+aws events describe-rule \
+  --name genetics-sync-fargate-task \
+  --region us-west-2
+
+# Remove the target
+aws events remove-targets \
+  --rule genetics-sync-fargate-task \
+  --ids Id32307706001 \
+  --region us-west-2
+
+# Delete the rule
+aws events delete-rule \
+  --name genetics-sync-fargate-task \
+  --region us-west-2
+
+# Verify (should return ResourceNotFoundException)
+aws events describe-rule \
+  --name genetics-sync-fargate-task \
+  --region us-west-2 || echo "✅ Rule removed from Morpheus"
+
+
+
+
+
+
+
+
+
 Hi @Pete Dias,
 I checked the EventBridge rule in the AWS console. The genetics-sync-fargate-task rule is still present but currently Disabled, and the CloudWatch monitoring shows no invocations or matched events recently.
 
