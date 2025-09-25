@@ -1,3 +1,12 @@
+The genetics-sync-fargate-task EventBridge rule has been removed from the Morpheus account as agreed. Verified in AWS console and via CLI that the rule no longer exists. No changes were made in staging or prod. Task completed.
+
+
+
+
+
+
+
+
 # Check you’re in the right account
 aws sts get-caller-identity
 
