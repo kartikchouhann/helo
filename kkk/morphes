@@ -1,3 +1,26 @@
+1. Check what the rule triggers
+
+Run this to see the target(s):
+
+aws events list-targets-by-rule \
+  --rule genetics-sync-fargate-task \
+  --region us-west-2
+
+2. Confirm no active ECS/Fargate service
+
+Check if the genetics task is still around:
+
+aws ecs list-task-definitions --region us-west-2 | grep -i genetics
+aws ecs list-services --region us-west-2 --cluster <cluster-name> --region us-west-2 | grep -i genetics
+
+
+If nothing is returned, you’re safe to delete the rule.
+
+
+
+
+
+
 Salma Sheref@SalmaSheref MINGW64 ~
 $ aws events list-rules --region us-west-2 | grep -i genetics
             "Name": "genetics-sync-fargate-task",
