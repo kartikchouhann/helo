@@ -1,3 +1,15 @@
+cd src\terraform\pulse
+dir /s morpheus.tfvars
+
+
+
+
+
+
+
+
+
+
 PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse> cd .\src\terraform\pulse\eventbridge\
 PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\eventbridge> tree /f
 Folder PATH listing for volume Windows-SSD
