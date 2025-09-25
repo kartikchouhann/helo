@@ -1,3 +1,52 @@
+Salma Sheref@SalmaSheref MINGW64 ~
+$ aws events list-targets-by-rule   --rule genetics-sync-fargate-task   --region us-west-2
+{
+    "Targets": [
+        {
+            "Id": "Id32307706001",
+            "Arn": "arn:aws:ecs:us-west-2:586815333384:cluster/platform-cluster-staging",
+            "RoleArn": "arn:aws:iam::586815333384:role/service-role/AWS_Events_Invoke_ECS_genetics-sync",
+            "EcsParameters": {
+                "TaskDefinitionArn": "arn:aws:ecs:us-west-2:586815333384:task-definition/genetics-sync-task-staging",
+                "TaskCount": 1,
+                "LaunchType": "FARGATE",
+                "NetworkConfiguration": {
+                    "awsvpcConfiguration": {
+                        "Subnets": [
+                            "subnet-0b03a5efb8ed15872",
+                            "subnet-034f393a2a125cd9e",
+                            "subnet-02ee330810ec042cb",
+                            "subnet-0c4343e0458c042f1"
+                        ],
+                        "SecurityGroups": [
+                            "sg-0a12f87ada04d1b95"
+                        ],
+                        "AssignPublicIp": "ENABLED"
+                    }
+                },
+                "EnableECSManagedTags": false,
+                "EnableExecuteCommand": false
+            }
+        }
+    ]
+}
+
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$ ^C
+
+Salma Sheref@SalmaSheref MINGW64 ~
+$
+
+
+
+
+
+
+
+
+
+
 1. Check what the rule triggers
 
 Run this to see the target(s):
