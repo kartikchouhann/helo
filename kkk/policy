@@ -1,0 +1,65 @@
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\iam\role_policies> tree /f
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 8AD3-73D0
+C:.
+│   allow-cloudwatch-log.json
+│   allow-config-publish-sns.json
+│   allow-kms-decrypt.json
+│   allow-kms-sns-decrypt.json
+│   allow-sns-publish.json
+│   assume-role-databricks-storage-credentials-policy.json
+│   break-glass-region.json
+│   data-developer-console-ro.json
+│   data-developer-console.json
+│   databricks-file-notification-mode.json
+│   datascience-dms-full-access.json
+│   datascience-s3-ro.json
+│   datasync-s3-cross-account-policy.json
+│   developer-logs-policy.json
+│   dms-s3-access.json
+│   dms-secret-access.json
+│   ec2-instance-role-bucket-access.json
+│   ec2-instance-role-databricks-bucket-access.json
+│   ec2-instance-role-emr-bucket-access.json
+│   ec2-instance-role-get-secrets.json
+│   ecs-events-policy.json
+│   efs-elastic-beanstalk-access.json
+│   elastic-beanstalk-carepackages-instance-role-policy.json
+│   elastic-beanstalk-instance-role-bucket-access.json
+│   elastic-beanstalk-instance-role-policy.json
+│   elastic-beanstalk-jobsrunner-instance-role-policy.json
+│   eventbridge-endpoint-policy.json
+│   feedwatch-support.json
+│   general-s3-bucket-replication.json
+│   integration-s3-antivirus-instance-role-policy.json
+│   jobsrunner-codebuild-role-policy.json
+│   jobsrunner-codepipeline-role-policy.json
+│   parlorboss-s3-upload.json
+│   pulse-cluster-task-execution-role-policy.json
+│   pulse-cluster-task-role-policy.json
+│   pulse-databricks-role-policy.json
+│   pulse-emr-data-lake-service-role-policy.json
+│   pulse-glue-data-lake-role-policy.json
+│   rds-sql-server-backup-restore.json
+│   s3-access-rw.json
+│   sls-developer-api-execution-role-policy.json
+│   sls-developer-console.json
+│   sls-developer-deployment.json
+│   sls-lambda-aggregators.json
+│   sql-migrations-cicd.json
+│
+└───ms-roles
+        pulse-alerts-task-role-policy.json
+        pulse-auth-task-role-policy.json
+        pulse-feed-task-role-policy.json
+        pulse-feednext-rc-task-role-policy.json
+        pulse-feednext-task-role-policy.json
+        pulse-generic-task-role-policy.json
+        pulse-genetics-task-role-policy.json
+        pulse-herd-task-role-policy.json
+        pulse-monolith-task-role-policy.json
+        pulse-op-sync-task-role-policy.json
+        pulse-ops-task-role-policy.json
+        pulse-parlors-task-role-policy.json
+
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\iam\role_policies> 
