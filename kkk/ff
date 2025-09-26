@@ -1,0 +1,39 @@
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\policies\messaging\sns> tree /f
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 8AD3-73D0
+C:.
+│   config.tf
+│   main.tf
+│   management.tfvars
+│   morpheus.tfvars
+│   variables.tf
+│   
+└───json
+        integrations-parlors-dailymilkings.json
+        vas-auth-users.json
+        vas-genetics-matings.json
+        vas-herd-cowevents.json
+        vas-herd-daily-milkings.json
+        vas-herd-item-changes.json
+        vas-herd-pens.json
+        vas-ops-addresses.json
+        vas-ops-companies.json
+        vas-ops-dairies.json
+        vas-ops-dairy-vendor-integrations.json
+        vas-ops-outgoing-integrations.json
+        vas-ops-vendor-integrations.json
+        vas-ops-zone-integrations.json
+        vas-ops-zones.json
+        vas-parlors-milk-parlors.json
+        vas-parlors-milkings.json
+        vas-parlors.json
+        vas-platform-feed.json
+        vas-platform-genetics.json
+        vas-platform-integration.json
+        vas-platform-items.json
+        vas-platform-kpis.json
+        vas-platform-notifications.json
+        vas-pulse-care-packages.json
+        vas-worklists.json
+
+PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\policies\messaging\sns>
