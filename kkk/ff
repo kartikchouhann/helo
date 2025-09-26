@@ -1,3 +1,9 @@
+terraform -chdir="src/terraform/pulse/security/policies/messaging/sns" fmt -recursive
+terraform -chdir="src/terraform/pulse/security/policies/messaging/sns" validate
+
+
+
+
 PS C:\Users\Salma Sheref\Documents\GIT\vas-devops-pulse\src\terraform\pulse\security\policies\messaging\sns> tree /f
 Folder PATH listing for volume Windows-SSD
 Volume serial number is 8AD3-73D0
